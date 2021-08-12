@@ -13,14 +13,13 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        boxShadow: '0px 4px 0px #DDDDDD',     
+        boxShadow: `0px 4px 0px ${theme.colors.lightGrey}`,     
     },
-    title: {
-        fontFamily: theme.fonts.title400,       
-        color: theme.colors.mainblack,
+    text: {
+        fontFamily: theme.fonts.regular,       
+        color: theme.colors.darkGrey,
         fontSize: 16,      
-    },
-    
+    },   
     icon: {
         width: 24,
         height: 24,

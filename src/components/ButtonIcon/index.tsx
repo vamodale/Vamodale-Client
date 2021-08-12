@@ -24,7 +24,7 @@ export function ButtonIcon({ title, ...rest }: Props) {
                 <Image source={GoogleImg} style={styles.icon} />
             </View>
 
-            <Text style={styles.title}>
+            <Text style={styles.text}>
                 {title}
             </Text>
         </TouchableOpacity>

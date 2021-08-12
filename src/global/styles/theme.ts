@@ -1,23 +1,23 @@
 export const theme = {
     colors: {
-        mainred: '#FE5F55',
-
-        maingreen: '#2EBFA5',
-        lightgreen: '#7DDE92',
-        mainblue: '#3083DC',
-        mainwhite: '#F8FFE5',
-        mainpurple: '#4E4187',
-        mainblack: '#191308',
+        green: '#2EBFA5',
+        blue: '#3083DC',
+        purple: '#4E4187',
+        yellow: '#FFEE33',
         white: '#FFFFFF',
-
-        darkgreen: '#28A58E',
-        darkpurple: '#433872',
+        darkGreen: '#28A58E',
+        darkPurple: '#433872',
+        darkGrey: '#191308',
+        redError: '#FE5F55',
+        greenSuccess: '#7DDE92',
+        lightBackground: '#F8FFE5',
+        lightGrey: '#DDDDDD;',
     },
 
     fonts: {
-        title400: 'Poppins_400Regular',
-        title500: 'Poppins_500Medium',
-        text600: 'Poppins_600SemiBold',
-        text700: 'Poppins_700Bold',
+        regular: 'Poppins_400Regular',
+        mudium: 'Poppins_500Medium',
+        semibold: 'Poppins_600SemiBold',
+        bold: 'Poppins_700Bold' 
     }
 };

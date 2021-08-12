@@ -25,9 +25,9 @@ export function SignIn() {
                     activeOpacity={0.7}
                 />
 
-                <Text style={styles.title}>
+                <Text style={styles.p1}>
                     Ainda não tem conta?{'\n'}
-                    <Text style={styles.subtitle}>
+                    <Text style={styles.p2}>
                         Registre-se aqui
                     </Text>
                 </Text>
