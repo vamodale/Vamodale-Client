@@ -26,7 +26,7 @@ export const styles = StyleSheet.create({
         fontSize: 16,
         textAlign: 'center',
         marginBottom: 64,
-        fontFamily: theme.fonts.bold,
+        fontFamily: theme.fonts.semibold,
         lineHeight: 24
     }
 });

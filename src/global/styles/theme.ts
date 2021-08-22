@@ -11,7 +11,7 @@ export const theme = {
         redError: '#FE5F55',
         greenSuccess: '#7DDE92',
         lightBackground: '#F8FFE5',
-        lightGrey: '#DDDDDD;',
+        lightGrey: '#DDDDDD',
     },
 
     fonts: {

@@ -8,7 +8,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#7DDE92"
+      "backgroundColor": "#2EBFA5"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -27,6 +27,8 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "",
+    "githubUrl": "https://github.com/vamodale/Vamodale-Client"
   }
 }

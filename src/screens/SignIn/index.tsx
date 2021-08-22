@@ -27,9 +27,10 @@ export function SignIn() {
 
                 <Text style={styles.p1}>
                     Ainda não tem conta?{'\n'}
-                    <Text style={styles.p2}>
-                        Registre-se aqui
-                    </Text>
+                    Registre-se aqui
+                </Text>
+                <Text style={styles.p2}>
+                    
                 </Text>
             </View>
         </View>

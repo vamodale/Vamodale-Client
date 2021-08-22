@@ -6,14 +6,16 @@ import { theme } from '../../global/styles/theme';
 
 export const styles = StyleSheet.create({
     container: {
-        width: '300px',
+        width: 300,
         height: 40,
         backgroundColor: theme.colors.white,
         borderRadius: 20,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        boxShadow: `0px 4px 0px ${theme.colors.lightGrey}`,     
+        shadowColor: theme.colors.lightGrey,
+        elevation: 3,
+        //boxShadow: `0px 4px 0px ${theme.colors.lightGrey}`,     
     },
     text: {
         fontFamily: theme.fonts.regular,       
