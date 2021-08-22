@@ -16,7 +16,7 @@ export const theme = {
 
     fonts: {
         regular: 'Poppins_400Regular',
-        mudium: 'Poppins_500Medium',
+        medium: 'Poppins_500Medium',
         semibold: 'Poppins_600SemiBold',
         bold: 'Poppins_700Bold' 
     }
