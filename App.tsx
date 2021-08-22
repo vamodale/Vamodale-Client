@@ -5,8 +5,7 @@ import { Poppins_400Regular, Poppins_500Medium, Poppins_600SemiBold, Poppins_700
 import AppLoading from 'expo-app-loading';
 import { useFonts } from 'expo-font';
 
-import { SignIn } from './src/screens/SignIn';
-import { Home } from './src/screens/Home';
+import { Routes } from './src/routes';
 import { theme } from './src/global/styles/theme';
 
 export default function App() {
@@ -29,7 +28,7 @@ export default function App() {
         translucent
       />
       <View style={{flex: 1, backgroundColor: theme.colors.lightBackground}}>
-        <Home/>
+      <Routes />
       </View>
     </>
   );

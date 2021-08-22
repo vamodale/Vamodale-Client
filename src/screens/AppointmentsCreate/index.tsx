@@ -15,7 +15,7 @@ import { theme } from '../../global/styles/theme';
 import { globalStyles } from '../../global/styles/globals';
 import { GreenLargeButton } from '../../components/GreenLargeButton';
 
-export function Home() {
+export function AppointmentCreate() {
     return (
         <View>
           <Background>
@@ -24,19 +24,8 @@ export function Home() {
                 <MaterialIcons style={globalStyles.headerLeftIcon} name="menu-open" size={24} color={theme.colors.white}/>
                 <Text style={globalStyles.headerTitle}>dois vizinhos</Text>
               </View>
-              <View style={styles.headerContent}>
-                <Search style={styles.search}/>
-                <Add/>
-              </View>
             </View>
           </Background>
-          <View style={{padding: 24}}>
-            <Event/>
-          </View>
-          <View style={styles.footer}>
-            <Text style={styles.footerText}>Não encontrou o que procurava?</Text>
-            <GreenLargeButton title="cadastre um evento"/>
-          </View>
         </View>
     );
 }
