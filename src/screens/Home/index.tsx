@@ -24,7 +24,7 @@ export function Home() {
                 <Text style={globalStyles.headerTitle}>dois vizinhos</Text>
               </View>
               <View style={styles.headerContent}>
-                <Search style={styles.search}  />
+                <Search style={styles.search}/>
                 <Add/>
               </View>
             </View>
