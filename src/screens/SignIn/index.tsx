@@ -13,8 +13,8 @@ import { styles } from './styles';
 export function SignIn() {
     const navegation = useNavigation();
 
-    function handleSignIn() {
-        navegation.navigate('Home');
+    function handleSignIn() { 
+        navegation.navigate({ key: 'Home'}); // Não funciona << ajude aqui!
     }
 
     return (
