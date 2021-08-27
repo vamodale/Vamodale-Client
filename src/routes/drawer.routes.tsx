@@ -73,18 +73,18 @@ export function MyDrawer() {
     >
       {Object.values(pages).map((item) => 
       <Drawer.Screen key={item.label} options={{
-           title: item.label,
-           drawerItemStyle: styles.drawerItem,
-           drawerLabelStyle: styles.drawerItemLabel,
-           drawerIcon: () => (
-              <MaterialIcons
-                 name={item.icon}
-                 size={24}
-                 color={theme.colors.purple}
-              />
-           ),
+        title: item.label,
+        drawerItemStyle: styles.drawerItem,
+        drawerLabelStyle: styles.drawerItemLabel,
+        drawerIcon: () => (
+          <MaterialIcons
+            name={item.icon}
+            size={24}
+            color={theme.colors.purple}
+          />
+        ),
         }} name={item.label} component={item.screen} />
-        )}
+      )}
       <Drawer.Screen name="Home" options={{
           drawerItemStyle: styles.drawerHome
         }} component={Home}/>
