@@ -2,6 +2,7 @@ import React from 'react';
 import {
     View,
     Text,
+    TouchableOpacity
 } from 'react-native';
 
 import { Background } from '../../components/Header/Background';
@@ -23,12 +24,19 @@ export function Home() {
       //@ts-ignore
       navegation.navigate('AppointmentCreate');
   }
+
+  function handleDrawer() {
+    //@ts-ignore
+    navegation.openDrawer();
+}
     return (
         <View style={globalStyles.lightBackground} >
           <Background>
             <View style={styles.header}>
               <View style={styles.headerContent}>
-                <MaterialIcons style={globalStyles.headerLeftIcon} name="menu-open" size={24} color={theme.colors.white}/>
+                <TouchableOpacity>
+                  <MaterialIcons style={globalStyles.headerLeftIcon} name="menu-open" size={24} color={theme.colors.white} onPress={handleDrawer}/>
+                </TouchableOpacity>
                 <Text style={globalStyles.headerTitle}>dois vizinhos</Text>
               </View>
               <View style={styles.headerContent}>

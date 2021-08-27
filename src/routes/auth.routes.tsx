@@ -5,6 +5,8 @@ import { Home } from '../screens/Home';
 import { SignIn } from '../screens/SignIn';
 import { AppointmentCreate } from '../screens/AppointmentsCreate';
 
+import { MyDrawer } from './drawer.routes'
+
 const { Navigator, Screen } = createStackNavigator();
 
 export function AuthRoutes() {
@@ -16,12 +18,18 @@ export function AuthRoutes() {
       }}
     >
       <Screen
-        name="SignIn"
-        component={SignIn}
+        name="Drawer"
+        component={MyDrawer}
+        options={{ headerShown: false }}
       />
       <Screen
         name="Home"
         component={Home}
+        options={{ headerShown: false }}
+      />
+      <Screen
+        name="SignIn"
+        component={SignIn}
       />
       <Screen
         name="AppointmentCreate"

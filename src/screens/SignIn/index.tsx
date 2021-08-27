@@ -15,7 +15,7 @@ export function SignIn() {
 
     function handleSignIn() {
         //@ts-ignore
-        navegation.navigate('Home');
+        navegation.navigate('Drawer');
     }
 
     return (
@@ -35,10 +35,9 @@ export function SignIn() {
 
                 <Text style={styles.p1}>
                     Ainda não tem conta?{'\n'}
-                    Registre-se aqui
                 </Text>
                 <Text style={styles.p2}>
-                    
+                    Registre-se aqui
                 </Text>
             </View>
         </View>
