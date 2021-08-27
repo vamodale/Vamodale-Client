@@ -13,8 +13,9 @@ import { styles } from './styles';
 export function SignIn() {
     const navegation = useNavigation();
 
-    function handleSignIn() { 
-        navegation.navigate({ key: 'Home'}); // Não funciona << ajude aqui!
+    function handleSignIn() {
+        //@ts-ignore
+        navegation.navigate('Home');
     }
 
     return (

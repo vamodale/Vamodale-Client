@@ -14,10 +14,17 @@ import { styles } from './styles';
 import { theme } from '../../global/styles/theme';
 import { globalStyles } from '../../global/styles/globals';
 import { GreenLargeButton } from '../../components/GreenLargeButton';
+import { useNavigation } from '@react-navigation/native';
 
 export function Home() {
+  const navegation = useNavigation();
+
+  function handleAppointmentCreate() {
+      //@ts-ignore
+      navegation.navigate('AppointmentCreate');
+  }
     return (
-        <View>
+        <View style={globalStyles.lightBackground} >
           <Background>
             <View style={styles.header}>
               <View style={styles.headerContent}>
@@ -35,7 +42,7 @@ export function Home() {
           </View>
           <View style={styles.footer}>
             <Text style={styles.footerText}>Não encontrou o que procurava?</Text>
-            <GreenLargeButton title="cadastre um evento"/>
+            <GreenLargeButton onPress={handleAppointmentCreate} title="cadastre um evento"/>
           </View>
         </View>
     );

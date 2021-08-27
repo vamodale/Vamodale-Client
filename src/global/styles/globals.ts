@@ -11,5 +11,10 @@ export const globalStyles = StyleSheet.create({
 
   headerLeftIcon: {
     paddingHorizontal: 8
+  },
+
+  lightBackground: {
+    flex: 1, 
+    backgroundColor: theme.colors.lightBackground
   }
 });

@@ -28,7 +28,7 @@ export default function App() {
         translucent
       />
       <View style={{flex: 1, backgroundColor: theme.colors.lightBackground}}>
-      <Routes />
+        <Routes />
       </View>
     </>
   );
