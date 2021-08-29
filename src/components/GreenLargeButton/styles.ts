@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
         borderRadius: 20,
         alignItems: 'center',
         justifyContent: 'center',
-        width: '100%'
+        width: '100%',
     },
     text: {
         fontFamily: theme.fonts.medium,       

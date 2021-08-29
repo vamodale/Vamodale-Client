@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+    View,
     Text,
     TouchableOpacity,
     TouchableOpacityProps,
@@ -13,14 +14,16 @@ type Props = TouchableOpacityProps & {
 
 export function GreenLargeButton({ title, ...rest }: Props) {
     return (
-        <TouchableOpacity
-            style={styles.container}
-            {...rest}
-        >
+        <View style={{paddingHorizontal: 24}}>
+            <TouchableOpacity
+                style={styles.container}
+                {...rest}
+            >
 
-            <Text style={styles.text}>
-                {title}
-            </Text>
-        </TouchableOpacity>
+                <Text style={styles.text}>
+                    {title}
+                </Text>
+            </TouchableOpacity>
+        </View>
     );
 }

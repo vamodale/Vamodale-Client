@@ -48,7 +48,7 @@ export function Home() {
           <View style={{padding: 24}}>
             <Event/>
           </View>
-          <View style={styles.footer}>
+          <View>
             <Text style={styles.footerText}>Não encontrou o que procurava?</Text>
             <GreenLargeButton onPress={handleAppointmentCreate} title="cadastre um evento"/>
           </View>

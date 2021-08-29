@@ -2,36 +2,49 @@ import React from 'react';
 import {
     View,
     Text,
-    TouchableOpacity
 } from 'react-native';
 
 import { Background } from '../../components/Header/Background';
-import { Search } from '../../components/Header/Search';
-import { Add } from '../../components/Header/Add';
-import { Event } from '../../components/Event';
+import {ProfileContent} from '../../components/ProfileContent';
+import {GreenLargeButton} from '../../components/GreenLargeButton';
 
 import { MaterialIcons } from '@expo/vector-icons';
-//mport { styles } from './styles';
+import { styles } from './styles';
 import { theme } from '../../global/styles/theme';
 import { globalStyles } from '../../global/styles/globals';
-import { GreenLargeButton } from '../../components/GreenLargeButton';
+
 import { useNavigation } from '@react-navigation/native';
 
 export function Profile() {
   const navegation = useNavigation();
 
-  function handleAppointmentCreate() {
-      //@ts-ignore
-      navegation.navigate('AppointmentCreate');
-  }
 
-  function handleDrawer() {
-    //@ts-ignore
-    navegation.openDrawer();;
-}
     return (
-        <View style={globalStyles.lightBackground} >
-          <Text>Profile</Text>
+        <View style={globalStyles.lightBackground}>
+            <Background>
+                <View style={styles.header}>
+                    <View style={styles.headerContent}>
+                        <MaterialIcons 
+                            onPress={() => navegation.goBack()} 
+                            style={globalStyles.headerLeftIcon} 
+                            name="chevron-left" 
+                            size={24} 
+                            color={theme.colors.white}
+                        />
+                        <Text style={globalStyles.headerTitle}>meu perfil</Text>
+                    </View>
+                    <View style={styles.headerContent}>
+                        <MaterialIcons 
+                            style={globalStyles.headerRightIcon} 
+                            name="share" 
+                            size={24} 
+                            color={theme.colors.white}
+                        />
+                    </View>
+                </View>
+            </Background>
+                <ProfileContent/>
+                    <GreenLargeButton title="editar perfil"/>
         </View>
     );
 }
