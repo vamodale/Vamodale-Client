@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import { Home } from '../screens/Home';
 import { SignIn } from '../screens/SignIn';
+import { AppointmentInfo } from '../screens/AppointmentInfo';
 import { AppointmentCreate } from '../screens/AppointmentsCreate';
 
 import { MyDrawer } from './drawer.routes'
@@ -34,6 +35,10 @@ export function AuthRoutes() {
       <Screen
         name="AppointmentCreate"
         component={AppointmentCreate}
+        />
+      <Screen
+        name="AppointmentInfo"
+        component={AppointmentInfo}
         />
     </Navigator>
   );

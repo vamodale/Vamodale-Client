@@ -8,7 +8,9 @@ import {
 import { Background } from '../../components/Header/Background';
 import { Search } from '../../components/Header/Search';
 import { Add } from '../../components/Header/Add';
-import { Event } from '../../components/Event';
+import { Event } from '../../components/EventCard';
+
+import {Picker} from '@react-native-picker/picker';
 
 import { MaterialIcons } from '@expo/vector-icons';
 import { styles } from './styles';
@@ -21,14 +23,14 @@ export function Home() {
   const navegation = useNavigation();
 
   function handleAppointmentCreate() {
-      //@ts-ignore
-      navegation.navigate('AppointmentCreate');
+    //@ts-ignore
+    navegation.navigate('AppointmentCreate');
   }
 
   function handleDrawer() {
     //@ts-ignore
     navegation.openDrawer();
-}
+  } 
     return (
         <View style={globalStyles.lightBackground} >
           <Background>
