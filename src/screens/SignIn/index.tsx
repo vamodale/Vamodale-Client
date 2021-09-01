@@ -20,6 +20,8 @@ export function SignIn() {
     async function handleSignInWithGoogle(){
         try {
             await signInWithGoogle
+             //@ts-ignore
+            navegation.navigate('Drawer');
 
         } catch (error) {
             console.log(error);
@@ -44,7 +46,7 @@ export function SignIn() {
                 <ButtonIcon
                     title="Login com Google"
                     activeOpacity={0.7}
-                    onPress={signInWithGoogle}
+                    onPress={handleSignInWithGoogle}
                 />
             </View>
         </View>
