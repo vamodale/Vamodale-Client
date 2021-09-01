@@ -29,11 +29,6 @@ export function SignIn() {
         }
     }
 
-    function handleSignIn() {
-        //@ts-ignore
-        navegation.navigate('Drawer');
-    }
-
     return (
         <View style={styles.container}>
             <Image
