@@ -15,6 +15,8 @@ import { globalStyles } from '../../global/styles/globals';
 
 import { useNavigation } from '@react-navigation/native';
 
+
+
 export function Profile() {
   const navegation = useNavigation();
 
@@ -25,7 +27,8 @@ export function Profile() {
                 <View style={styles.header}>
                     <View style={styles.headerContent}>
                         <MaterialIcons 
-                            onPress={() => navegation.goBack()} 
+                            //@ts-ignore
+                            onPress={() => navegation.navigate("Home")} 
                             style={globalStyles.headerLeftIcon} 
                             name="chevron-left" 
                             size={24} 

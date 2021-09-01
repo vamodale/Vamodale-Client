@@ -5,17 +5,22 @@ import { theme } from '../../global/styles/theme';
 
 import { MaterialIcons } from '@expo/vector-icons';
 
+import { useAuth } from '../../hooks/auth'
+
 export const ProfileContent:React.FC = ({children}) => {
+
+  const { user } = useAuth()
+
   return (
     <View style={styles.container} >
       <View style={styles.head}>
-        <Image style={styles.profilePicture} source={{uri:"https://bit.ly/dan-abramov"}}/>
+        <Image style={styles.profilePicture} source={{uri: user.photo }}/>
         <View style={styles.names}>
           <Text style={styles.name}>
-            Arthur Sosnowski
+            {user.name}
           </Text>
           <Text style={styles.nickname}>
-           Turnado
+          {user.nickname}
           </Text>
         </View>
       </View>
@@ -23,11 +28,11 @@ export const ProfileContent:React.FC = ({children}) => {
       <View style={styles.attributes}>
         <View style={styles.atributeWrapper}>
           <Text style={styles.attributeLabel}>idade</Text>
-          <Text style={styles.attribute}>20</Text>
+          <Text style={styles.attribute}>{user.idade}</Text>
         </View>
         <View style={styles.atributeWrapper}>
           <Text style={styles.attributeLabel}>cidade</Text>
-          <Text style={styles.attribute}>dois vizinhos</Text>
+          <Text style={styles.attribute}>{user.city}</Text>
         </View>
       </View>
     </View>
