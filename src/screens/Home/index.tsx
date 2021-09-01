@@ -11,6 +11,7 @@ import { Add } from '../../components/Header/Add';
 import { Event } from '../../components/EventCard';
 
 import api from '../../services/api'
+import { get_events } from '../../services/get_event';
 
 import { MaterialIcons } from '@expo/vector-icons';
 import { styles } from './styles';
@@ -18,15 +19,16 @@ import { theme } from '../../global/styles/theme';
 import { globalStyles } from '../../global/styles/globals';
 import { GreenLargeButton } from '../../components/GreenLargeButton';
 import { useNavigation } from '@react-navigation/native';
+import { useState } from 'react';
 
 export function Home() {
-  const navegation = useNavigation();
+  const [events, setEvents] = useState([])
 
-  api.get("events")
-    .then((response) => alert(response.data))
-    .catch((err) => {
-      console.error("ops! ocorreu um erro " + err);
-  });
+  const navegation = useNavigation();
+  
+  get_events().then( events => {
+    setEvents(events)
+  } )
 
   function handleAppointmentCreate() {
     //@ts-ignore
@@ -54,7 +56,9 @@ export function Home() {
             </View>
           </Background>
           <View style={{padding: 24}}>
-            <Event/>
+            {events.map(event => {
+              return <Event event={event}/>
+            })}
           </View>
           <View>
             <Text style={styles.footerText}>Não encontrou o que procurava?</Text>

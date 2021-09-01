@@ -5,21 +5,29 @@ export const styles = StyleSheet.create({
   container: {
     overflow: 'hidden',
     padding: 24,
+    marginBottom: 8,
     backgroundColor: theme.colors.purple,
     borderRadius: 20,
     position: 'relative',
   },
 
+  subtitle: {
+    marginTop: -4,
+    display: 'flex',
+    flexDirection: 'row',
+    alignContent: 'flex-start'
+  },
+
   title: {
     fontFamily: theme.fonts.bold,
     color: theme.colors.white,
-    fontSize: 20
+    fontSize: 20,
   },
 
   date: {
     fontFamily: theme.fonts.semibold,
     color: theme.colors.white,
-    fontSize: 16
+    fontSize: 16,
   },
 
   hour: {
@@ -29,7 +37,7 @@ export const styles = StyleSheet.create({
   },
 
   attributes: {
-    paddingTop: 8,
+    paddingTop: 4,
   },
 
   attribute: {
@@ -45,7 +53,7 @@ export const styles = StyleSheet.create({
   },
 
   subscribers: {
-    paddingTop: 16,
+    paddingTop: 8,
     display: 'flex',
     flexDirection: 'row'
   },
@@ -58,6 +66,7 @@ export const styles = StyleSheet.create({
     left: 0,
     top: 0,
     borderWidth: 1,
+    backgroundColor: 'grey',
     borderColor: theme.colors.purple,
   },
 

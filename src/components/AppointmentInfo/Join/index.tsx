@@ -4,10 +4,18 @@ import { styles } from './styles';
 import { theme } from '../../../global/styles/theme';
 
 import { MaterialIcons } from '@expo/vector-icons';
+import { join_event } from '../../../services/join_event';
+import { useState } from 'react';
+import { get_events } from '../../../services/get_event';
 
-export const Join:React.FC = ({children}) => {
+export const Join = ({event, addJogador}) => {
   function handleEventJoin(){
-
+    join_event( event.id ).then( _ => {
+      event = get_events(event.id)
+      event.then( res => {
+        addJogador(res.jogadores)
+      } )
+    })
   }
 
   return (

@@ -5,7 +5,7 @@ import { theme } from '../../../global/styles/theme';
 
 import { MaterialIcons } from '@expo/vector-icons';
 
-export const UserIn:React.FC = ({children}) => {
+export const UserIn = ( props ) => {
 
   function handleEventLeave() {
     
@@ -16,19 +16,20 @@ export const UserIn:React.FC = ({children}) => {
   return (
     <View style={styles.userIn}>
       <View style={styles.wrapperPicture}>
-        <Image style={styles.profilePicture} source={{uri:"https://bit.ly/dan-abramov"}}/>
+        {
+          props.player.profile_picture == '' ?
+          <View style={styles.profilePicture}/> :
+        <Image style={styles.profilePicture} source={{uri:props.player.profile_picture}}/>
+        }
         <View style={styles.textWrapper}>
           <View style={styles.names}>
             <Text style={styles.nickname}>
-              Turnado
+              {props.player.apelido}
             </Text>
             <Text style={styles.name}> | </Text>
             <Text style={styles.name}>
-              Arthur Sosnowski
+            {props.player.nome}
             </Text>
-          </View>
-          <View>
-            <Text style={styles.date}>cadastrou o evento hà 4 dias</Text>
           </View>
         </View>
       </View>

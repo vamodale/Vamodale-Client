@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     View,
     Text,
@@ -16,9 +16,21 @@ import { theme } from '../../global/styles/theme';
 import { globalStyles } from '../../global/styles/globals';
 import { useNavigation } from '@react-navigation/native';
 
-export function AppointmentInfo() {
-  const navegation = useNavigation();
+import { format } from 'date-fns'
+import { ptBR } from 'date-fns/locale';
+import { useEffect } from 'react';
 
+export function AppointmentInfo( {route, navigation } ) {
+  const navegation = useNavigation();
+  const {event} = route.params
+  const [jogadores, setJogadores] = useState(event.jogadores)
+
+  console.log(jogadores)
+
+  String.prototype.capitalize = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+  }
+  
   return (
     <View style={globalStyles.purpleBackground} >
       <Background>
@@ -45,16 +57,20 @@ export function AppointmentInfo() {
         </Background>
       <View style={{padding: 24}}>
         <View style={styles.container}>
-          <Text style={styles.title}>Futebas na Cancha da ACDC</Text>
+          <Text style={styles.title}>{event.nome}</Text>
           <View>
+          <View style={styles.infoWrapper}>
+              <MaterialIcons name="emoji-events" size={24} color={theme.colors.white}/>
+              <Text style={styles.infoText}>{event.esporte}</Text>
+            </View>
             <View style={styles.infoWrapper}>
               <MaterialIcons name="watch-later" size={24} color={theme.colors.white}/>
-              <Text style={styles.infoText}>Domingo, 11/07 - às 14H00</Text>
+              <Text style={styles.infoText}>{format(event.data, 'EEEE', {locale: ptBR}).capitalize()}, {event.data.getDate().toLocaleString('pt-BR', {minimumIntegerDigits: 2})}/{event.data.getMonth().toLocaleString('pt-BR', {minimumIntegerDigits: 2})} - às {event.data.getHours().toLocaleString('pt-BR', {minimumIntegerDigits: 2})}h{event.data.getMinutes().toLocaleString('pt-BR', {minimumIntegerDigits: 2})}</Text>
             </View>
             <View style={styles.infoWrapper}>
               <View style={styles.info}>
                 <MaterialIcons name="room" size={24} color={theme.colors.white}/>
-                <Text style={styles.infoText}>Campo ACDC, Bairro Das Towers, 1337</Text>
+                <Text style={styles.infoText}>{event.endereco.rua}, {event.endereco.numero}, {event.endereco.bairro} - {event.endereco.complemento}</Text>
               </View>
               <View>
                 <MaterialIcons name="link" size={24} color={theme.colors.white}/>
@@ -62,9 +78,16 @@ export function AppointmentInfo() {
             </View>
           </View>
         </View>
-        <UserIn/>
-        <Join/>
-        <Slot/>
+        {
+          jogadores.map(jogador => {
+            return <UserIn player = {jogador}/>
+          })
+        }
+        {
+          event.num_vagas - jogadores.length > 0?
+          <Join event={event} addJogador={setJogadores}/>: null
+        }
+        <Slot slots={event.num_vagas - jogadores.length}/>
       </View>
     </View>
     );
