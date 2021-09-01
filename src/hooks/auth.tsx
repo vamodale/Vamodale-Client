@@ -3,6 +3,9 @@ import React, { createContext, ReactNode, useContext, useState, useEffect } from
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import * as AuthSession from 'expo-auth-session';
+import { reqLogin } from '../services/login'
+import { getForegroundPermissionsAsync, getLastKnownPositionAsync, requestForegroundPermissionsAsync, getCurrentPositionAsync, reverseGeocodeAsync } from 'expo-location'
+import { reqCadastro } from '../services/cadastro';
 
 interface AuthProviderProps {
   children: ReactNode;
@@ -15,7 +18,6 @@ interface User {
   email: string;
   photo?: string;
   city: string;
-  idade: number;
 }
 
 interface IAuthContextData {
@@ -65,10 +67,18 @@ function AuthProvider({ children }: AuthProviderProps ){
           nickname: userInfo.given_name,
           email: userInfo.email,
           photo: userInfo.picture,
-          city: "Dois Vizinhos",
-          idade: 0,
+          city: 'Dois vizinhos'
         };
-
+        
+        await login( userLogged.id, userLogged.email ).then( async res => {
+          if (res == 400) {
+            await cadastro( userLogged )
+          }
+          else {
+            await AsyncStorage.setItem('Authorization', res.Authorization);
+          }
+        } )
+        
         setUser(userLogged);
         await AsyncStorage.setItem(userStorageKey, JSON.stringify(userLogged));
       }
@@ -76,6 +86,40 @@ function AuthProvider({ children }: AuthProviderProps ){
     } catch (error) {
       throw new Error(error);
     }
+  }
+
+  async function cadastro(user) {
+    let userBody = {
+      nome: user.name,
+      apelido: user.nickname,
+      email: user.email,
+      openid: user.id,
+      profile_picture: user.photo
+    }
+    await getForegroundPermissionsAsync().then(async permission => {
+      if ( !permission.granted ) {
+        permission = await requestForegroundPermissionsAsync()
+      }
+      if ( permission.granted ) {
+        const position = await getLastKnownPositionAsync({}) 
+        await reverseGeocodeAsync( {
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude
+        } ).then( geo => {
+          userBody.cidade = geo[0].subregion
+        } )
+      }
+    })
+    await reqCadastro( userBody ).then(token=>{
+      console.log(token)
+      AsyncStorage.setItem('Authorization', token.Authorization);
+    })
+  }
+
+  async function login( openid, email ) {
+    let res = await reqLogin( openid, email )
+    
+    return res
   }
 
   async function signOut(){

@@ -53,9 +53,11 @@ export function Home() {
             </View>
           </Background>
           <View style={{padding: 24}}>
-            {events.map(event => {
-              return <Event event={event}/>
-            })}
+            { events !== undefined ? 
+              events.map(event => {
+                return <Event event={event}/>
+              }) : null
+            }
           </View>
           <View>
             <Text style={styles.footerText}>Não encontrou o que procurava?</Text>
