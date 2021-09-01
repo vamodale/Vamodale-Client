@@ -29,7 +29,7 @@ export function Home() {
           <Background>
             <View style={styles.header}>
               <View style={styles.headerContent}>
-                <MaterialIcons style={globalStyles.headerLeftIcon} name="menu-open" size={24} color={theme.colors.white}/>
+                <MaterialIcons style={globalStyles.headerLeftIcon} name="menu-open" size={24} color={theme.colors.white} onPress={handleDrawer}/>
                 <Text style={globalStyles.headerTitle}>dois vizinhos</Text>
               </View>
               <View style={styles.headerContent}>
@@ -41,7 +41,7 @@ export function Home() {
           <View style={{padding: 24}}>
             <Event/>
           </View>
-          <View style={styles.footerText}>
+          <View>
             <Text style={styles.footerText}>Não encontrou o que procurava?</Text>
             <GreenLargeButton onPress={handleAppointmentCreate} title="cadastre um evento"/>
           </View>
