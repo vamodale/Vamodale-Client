@@ -24,6 +24,11 @@ export function Home() {
       navegation.navigate('AppointmentCreate');
   }
 
+  function handleDrawer() {
+    //@ts-ignore
+    navegation.openDrawer();
+  }
+
     return (
         <View style={globalStyles.lightBackground} >
           <Background>

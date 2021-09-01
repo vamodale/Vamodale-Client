@@ -17,7 +17,7 @@ import { useNavigation } from '@react-navigation/native';
 export function AppointmentCreate() {
   const navegation = useNavigation();
   return (
-    <View style={globalStyles.purpleBackGround}>
+    <View style={globalStyles.purpleBackground}>
       <Background>
         <View style={styles.header}>
           <View style={styles.headerContent}>
