@@ -2,7 +2,6 @@ import React from 'react';
 import {
     View,
     Text,
-    TouchableOpacity
 } from 'react-native';
 
 import { Background } from '../../components/Header/Background';
@@ -10,7 +9,6 @@ import { Search } from '../../components/Header/Search';
 import { Add } from '../../components/Header/Add';
 import { Event } from '../../components/EventCard';
 
-import api from '../../services/api'
 import { get_events } from '../../services/get_event';
 
 import { MaterialIcons } from '@expo/vector-icons';
@@ -31,22 +29,21 @@ export function Home() {
   } )
 
   function handleAppointmentCreate() {
-    //@ts-ignore
-    navegation.navigate('AppointmentCreate');
+      //@ts-ignore
+      navegation.navigate('AppointmentCreate');
   }
 
   function handleDrawer() {
     //@ts-ignore
     navegation.openDrawer();
-  } 
+  }
+
     return (
         <View style={globalStyles.lightBackground} >
           <Background>
             <View style={styles.header}>
               <View style={styles.headerContent}>
-                <TouchableOpacity>
-                  <MaterialIcons style={globalStyles.headerLeftIcon} name="menu-open" size={24} color={theme.colors.white} onPress={handleDrawer}/>
-                </TouchableOpacity>
+                <MaterialIcons style={globalStyles.headerLeftIcon} name="menu-open" size={24} color={theme.colors.white} onPress={handleDrawer}/>
                 <Text style={globalStyles.headerTitle}>dois vizinhos</Text>
               </View>
               <View style={styles.headerContent}>

@@ -19,7 +19,7 @@ export function SignIn() {
 
     async function handleSignInWithGoogle(){
         try {
-            await signInWithGoogle
+            await signInWithGoogle()
              //@ts-ignore
             navegation.navigate('Drawer');
 

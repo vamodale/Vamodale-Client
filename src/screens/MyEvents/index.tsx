@@ -8,7 +8,7 @@ import {
 import { Background } from '../../components/Header/Background';
 import { Search } from '../../components/Header/Search';
 import { Add } from '../../components/Header/Add';
-import { Event } from '../../components/Event';
+import { Event } from '../../components/EventCard';
 
 import { MaterialIcons } from '@expo/vector-icons';
 //import { styles } from './styles';
