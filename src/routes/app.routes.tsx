@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, Image} from 'react-native';
+import {View, Text, Image, Alert} from 'react-native';
 import { 
   createDrawerNavigator,
   DrawerContentScrollView,
@@ -12,7 +12,7 @@ import { styles } from '../screens/Drawer/styles';
 import { theme } from '../global/styles/theme'
 
 import { Home } from '../screens/Home';
-import { SignOut } from '../screens/SignOut';
+import { EditProfile } from '../screens/EditProfile';
 import { MyEvents } from '../screens/MyEvents';
 import { Profile } from '../screens/MyProfile';
 import { AppointmentCreate } from '../screens/AppointmentsCreate';
@@ -33,12 +33,6 @@ const pages = {
     label: 'meus eventos',
     screen: MyEvents
   },
-
-  logout: {
-    icon: 'logout' as const,
-    label: 'logout',
-    screen: SignOut
-  }
 }
 
 const Drawer = createDrawerNavigator();
@@ -46,7 +40,18 @@ const Drawer = createDrawerNavigator();
 
 //@ts-ignore
 function CustomDrawerContent(props) {
-  const { user } = useAuth();
+  const { user, signOut } = useAuth();
+
+  async function handleSignOut(){
+      try {
+          await signOut();
+
+      } catch (error) {
+          console.log(error);
+          Alert.alert('Deu bosta ai na conta google.');
+      }
+  }
+
   return (
     <DrawerContentScrollView {...props}>
       <DrawerItem label={
@@ -62,6 +67,18 @@ function CustomDrawerContent(props) {
         </>
         } onPress={() => alert('alerta funciona')} />
       <DrawerItemList {...props} />
+      <DrawerItem onPress={handleSignOut} 
+        label="logout"
+        style={styles.drawerItem}
+        labelStyle={styles.drawerItemLabel}
+        icon={() => (
+          <MaterialIcons
+          name="logout"
+          size={24}
+          color={theme.colors.purple}
+        />
+        )}
+        />
     </DrawerContentScrollView>
   );
 }
@@ -92,7 +109,6 @@ export function AppRoutes() {
         ),
         }} name={item.label} component={item.screen} />
       )}
-
       <Drawer.Screen name="Home" options={{
           drawerItemStyle: styles.drawerHome
         }} component={Home}/>
@@ -106,6 +122,11 @@ export function AppRoutes() {
         name="AppointmentInfo" options={{
           drawerItemStyle: styles.drawerHome
         }} component={AppointmentInfo}
+        />
+      <Drawer.Screen
+        name="EditProfile" options={{
+          drawerItemStyle: styles.drawerHome
+        }} component={EditProfile}
         />
     </Drawer.Navigator>
   );

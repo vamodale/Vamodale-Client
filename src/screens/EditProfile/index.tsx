@@ -7,6 +7,8 @@ import {
 import { Background } from '../../components/Header/Background';
 import {ProfileContent} from '../../components/ProfileContent';
 import {GreenLargeButton} from '../../components/GreenLargeButton';
+import { RedLargeButton } from '../../components/RedLargeButton';
+
 
 import { MaterialIcons } from '@expo/vector-icons';
 import { styles } from './styles';
@@ -25,18 +27,23 @@ export function EditProfile() {
                 <View style={styles.header}>
                     <View style={styles.headerContent}>
                         <MaterialIcons 
-                            onPress={() => navegation.goBack()} 
+                            //@ts-ignore
+                            onPress={() => navegation.goBack("order")} 
                             style={globalStyles.headerLeftIcon} 
                             name="chevron-left" 
                             size={24} 
                             color={theme.colors.white}
                         />
-                        <Text style={globalStyles.headerTitle}>meu perfil</Text>
+                        <Text style={globalStyles.headerTitle}>editar Perfil</Text>
                     </View>
                 </View>
             </Background>
                 <ProfileContent/>
-                <GreenLargeButton title="editar perfil"/>
+                <View style={styles.buttons}>
+                <GreenLargeButton title="confirmar"/>
+                <View style={styles.buttonSeparation}/>
+                <RedLargeButton title="cancelar"/>
+                </View>
         </View>
     );
 }

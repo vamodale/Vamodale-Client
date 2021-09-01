@@ -23,5 +23,16 @@ export const styles = StyleSheet.create({
     fontFamily: theme.fonts.medium,
     color: theme.colors.purple,
     fontSize: 16,
+  },
+
+  buttons: {
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'row',
+    paddingHorizontal: 24
+  },
+
+  buttonSeparation: {
+    width: 16,
   }
 });

@@ -47,7 +47,9 @@ export function Profile() {
                 </View>
             </Background>
                 <ProfileContent/>
-                    <GreenLargeButton title="editar perfil"/>
+                    <View style={{paddingHorizontal: 24}}>
+                        <GreenLargeButton title="editar perfil" onPress={() =>  navegation.navigate("EditProfile")}/>
+                    </View>
         </View>
     );
 }

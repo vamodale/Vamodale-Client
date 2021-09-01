@@ -61,7 +61,9 @@ export function Home() {
           </View>
           <View>
             <Text style={styles.footerText}>Não encontrou o que procurava?</Text>
-            <GreenLargeButton onPress={handleAppointmentCreate} title="cadastre um evento"/>
+            <View style={{paddingHorizontal: 24}}>
+              <GreenLargeButton onPress={handleAppointmentCreate} title="cadastre um evento"/>
+            </View>
           </View>
         </View>
     );
