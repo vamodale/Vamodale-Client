@@ -10,7 +10,7 @@ import { Search } from '../../components/Header/Search';
 import { Add } from '../../components/Header/Add';
 import { Event } from '../../components/EventCard';
 
-import {Picker} from '@react-native-picker/picker';
+import api from '../../services/api'
 
 import { MaterialIcons } from '@expo/vector-icons';
 import { styles } from './styles';
@@ -21,6 +21,12 @@ import { useNavigation } from '@react-navigation/native';
 
 export function Home() {
   const navegation = useNavigation();
+
+  api.get("events")
+    .then((response) => alert(response.data))
+    .catch((err) => {
+      console.error("ops! ocorreu um erro " + err);
+  });
 
   function handleAppointmentCreate() {
     //@ts-ignore

@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { Alert } from 'react-native'
 import {
     View,
     Text,
@@ -6,12 +7,25 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
+import { useAuth } from '../../hooks/auth';
+
 import { ButtonIcon } from '../../components/ButtonIcon';
 import VamoDaleImg from '../../assets/vamo_dale.png';
 import { styles } from './styles';
 
 export function SignIn() {
     const navegation = useNavigation();
+    const { signInWithGoogle } = useAuth();
+
+    async function handleSignInWithGoogle(){
+        try {
+            await signInWithGoogle
+
+        } catch (error) {
+            console.log(error);
+            Alert.alert('Deu bosta ai na conta google.');
+        }
+    }
 
     function handleSignIn() {
         //@ts-ignore
@@ -30,15 +44,8 @@ export function SignIn() {
                 <ButtonIcon
                     title="Login com Google"
                     activeOpacity={0.7}
-                    onPress={handleSignIn}
+                    onPress={signInWithGoogle}
                 />
-
-                <Text style={styles.p1}>
-                    Ainda não tem conta?{'\n'}
-                </Text>
-                <Text style={styles.p2}>
-                    Registre-se aqui
-                </Text>
             </View>
         </View>
     );
