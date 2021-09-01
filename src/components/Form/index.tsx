@@ -118,7 +118,6 @@ function Form() {
                 })}
               </Picker>
 
-
               <TextInput
                 keyboardType='number-pad'
                 ref={slots}

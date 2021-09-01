@@ -55,13 +55,14 @@ export const styles = StyleSheet.create({
         display: 'flex',
         backgroundColor: theme.colors.white,
         fontFamily: theme.fonts.medium,
-        color: theme.colors.lightGrey,
+        color: theme.colors.darkGrey,
         borderRadius: 20,
         width: 162,
         height: 36,
         marginTop: 5,
         marginLeft: 24,
         paddingLeft: 16,
+        fontSize: 16,
     },
 
     labelSlots: {
@@ -86,6 +87,7 @@ export const styles = StyleSheet.create({
         marginLeft: 24,
         marginTop: 5,
         paddingLeft: 16,
+        fontSize: 16,
     },
 
     labelHour: {
@@ -108,6 +110,7 @@ export const styles = StyleSheet.create({
         marginLeft: 24,
         marginTop: 5,
         paddingLeft: 16,
+        fontSize: 16,
     },
 
     labelDate: {
@@ -131,6 +134,7 @@ export const styles = StyleSheet.create({
         marginLeft: 24,
         marginTop: 5,
         paddingLeft: 16,
+        fontSize: 16,
     },
 
     labelCep: {
@@ -146,7 +150,7 @@ export const styles = StyleSheet.create({
     inputCep: {
         display: 'flex',
         fontSize: 16,
-        fontFamily: theme.colors.lightGrey,
+        fontFamily: theme.fonts.medium,
         backgroundColor: theme.colors.white,
         borderRadius: 20,
         width: 208,
@@ -170,6 +174,7 @@ export const styles = StyleSheet.create({
         display: 'flex',
         backgroundColor: theme.colors.white,
         fontFamily: theme.fonts.medium,
+        fontSize: 16,
         borderRadius: 20,
         width: 80,
         height: 36,
@@ -192,6 +197,7 @@ export const styles = StyleSheet.create({
     inputDistrict: {
         display: 'flex',
         backgroundColor: theme.colors.white,
+        fontSize: 16,
         fontFamily: theme.fonts.medium,
         borderRadius: 20,
         width: 208,
