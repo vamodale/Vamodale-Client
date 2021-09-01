@@ -2,15 +2,12 @@ import React from 'react';
 import {
     View,
     Text,
-    TouchableOpacity
 } from 'react-native';
 
 import { Background } from '../../components/Header/Background';
 import { Search } from '../../components/Header/Search';
 import { Add } from '../../components/Header/Add';
 import { Event } from '../../components/EventCard';
-
-import api from '../../services/api'
 
 import { MaterialIcons } from '@expo/vector-icons';
 import { styles } from './styles';
@@ -22,29 +19,17 @@ import { useNavigation } from '@react-navigation/native';
 export function Home() {
   const navegation = useNavigation();
 
-  api.get("events")
-    .then((response) => alert(response.data))
-    .catch((err) => {
-      console.error("ops! ocorreu um erro " + err);
-  });
-
   function handleAppointmentCreate() {
-    //@ts-ignore
-    navegation.navigate('AppointmentCreate');
+      //@ts-ignore
+      navegation.navigate('AppointmentCreate');
   }
 
-  function handleDrawer() {
-    //@ts-ignore
-    navegation.openDrawer();
-  } 
     return (
         <View style={globalStyles.lightBackground} >
           <Background>
             <View style={styles.header}>
               <View style={styles.headerContent}>
-                <TouchableOpacity>
-                  <MaterialIcons style={globalStyles.headerLeftIcon} name="menu-open" size={24} color={theme.colors.white} onPress={handleDrawer}/>
-                </TouchableOpacity>
+                <MaterialIcons style={globalStyles.headerLeftIcon} name="menu-open" size={24} color={theme.colors.white}/>
                 <Text style={globalStyles.headerTitle}>dois vizinhos</Text>
               </View>
               <View style={styles.headerContent}>
@@ -56,7 +41,7 @@ export function Home() {
           <View style={{padding: 24}}>
             <Event/>
           </View>
-          <View>
+          <View style={styles.footerText}>
             <Text style={styles.footerText}>Não encontrou o que procurava?</Text>
             <GreenLargeButton onPress={handleAppointmentCreate} title="cadastre um evento"/>
           </View>
