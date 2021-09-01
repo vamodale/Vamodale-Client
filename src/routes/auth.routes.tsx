@@ -35,15 +35,12 @@ export function AuthRoutes() {
       <Screen
         name="AppointmentCreate"
         component={AppointmentCreate}
-<<<<<<< HEAD
       />
-=======
-        />
+        
       <Screen
         name="AppointmentInfo"
         component={AppointmentInfo}
         />
->>>>>>> 09639ddc05dbc3e835fc71223ad90ccc894e2cb9
     </Navigator>
   );
 }
