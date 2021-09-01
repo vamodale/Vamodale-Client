@@ -21,7 +21,7 @@ export function AppointmentCreate() {
       <Background>
         <View style={styles.header}>
           <View style={styles.headerContent}>
-            <MaterialIcons onPress={() => navegation.goBack()} style={globalStyles.headerLeftIcon} name="chevron-left" size={24} color={theme.colors.white} />
+            <MaterialIcons onPress={() => navegation.navigate("Home")} style={globalStyles.headerLeftIcon} name="chevron-left" size={24} color={theme.colors.white} />
             <Text style={globalStyles.headerTitle}>cadastrar evento</Text>
           </View>
         </View>

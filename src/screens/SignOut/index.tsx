@@ -13,14 +13,12 @@ import { ButtonIcon } from '../../components/ButtonIcon';
 import VamoDaleImg from '../../assets/vamo_dale.png';
 import { styles } from './styles';
 
-export function SignIn() {
-    const navegation = useNavigation();
-    const { signInWithGoogle } = useAuth();
+export function SignOut() {
+    const { signOut } = useAuth();
 
-    async function handleSignInWithGoogle(){
+    async function handleSignOut(){
         try {
-            await signInWithGoogle()
-             //@ts-ignore
+            await signOut();
 
         } catch (error) {
             console.log(error);
@@ -38,9 +36,9 @@ export function SignIn() {
 
             <View>
                 <ButtonIcon
-                    title="Login com Google"
+                    title="SignOut"
                     activeOpacity={0.7}
-                    onPress={handleSignInWithGoogle}
+                    onPress={handleSignOut}
                 />
             </View>
         </View>

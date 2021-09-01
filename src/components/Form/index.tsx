@@ -34,9 +34,11 @@ function Form() {
 
   const navegation = useNavigation();
 
-  function handleAppointmentCreate() {
+  function handleAppointmentCreate(values) {
     //@ts-ignore
-    navegation.navigate('AppointmentCreate');
+    values.data = values.date + values.hour
+    setEvent(values)
+    navegation.navigate('AppointmentInfo', {event: event});
   }
 
   const FormSchema = Yup.object().shape({
@@ -53,11 +55,13 @@ function Form() {
 
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+  
+  const [event, setEvent] = useState({})
 
-  const var_switch = isEnabled ? 'Competitivo' : 'Casual'
+  const var_switch = isEnabled ? 'competitivo' : 'casual'
 
   return (
-    <View style={globalStyles.purpleBackGround}>
+    <View style={globalStyles.purpleBackground}>
       <Formik
         initialValues={{
           appointmentName: '',
@@ -74,7 +78,7 @@ function Form() {
         onSubmit={values => {
           alert(values);
         }}
-        validationSchema={FormSchema}>
+        >
         {({
           values,
           handleChange,
@@ -87,14 +91,12 @@ function Form() {
             <View>
               <Text style={styles.labelName}>nome do evento</Text>
               <TextInput
-                ref={appointmentName}
-                value={values.appointmentName}
                 onChangeText={handleChange('appointmentName')}
-                onBlur={() => setFieldTouched('appointmentName', true)}
                 style={styles.inputName}
+                value={values.appointmentName}
                 placeholder="Rodrigo e companhia"
               />
-              {errors.appointmentName && touched.appointmentName && <Text>{errors.appointmentName}</Text>}
+              {errors.appointmentName && touched.appointmentName ? <Text>{errors.appointmentName}</Text>:null}
             </View>
 
             <View style={{ flexDirection: 'row' }}>
@@ -127,7 +129,7 @@ function Form() {
                 onChangeText={handleChange('slots')}
                 onBlur={() => setFieldTouched('slots', true)}
               />
-              {errors.slots && touched.slots && <Text>{errors.slots}</Text>}
+              {errors.slots && touched.slots ? <Text>{errors.slots}</Text>:null}
             </View>
 
             <View style={{ flexDirection: 'row' }}>
@@ -145,7 +147,7 @@ function Form() {
                 onChangeText={handleChange('hour')}
                 onBlur={() => setFieldTouched('hour', true)}
               />
-              {errors.hour && touched.hour && <Text>{errors.hour}</Text>}
+              {errors.hour && touched.hour ? <Text>{errors.hour}</Text>:null}
 
 
               <TextInput
@@ -157,34 +159,38 @@ function Form() {
                 onChangeText={handleChange('date')}
                 onBlur={() => setFieldTouched('date', true)}
               />
-              {errors.date && touched.date && <Text>{errors.date}</Text>}
+              {errors.date && touched.date ? <Text>{errors.date}</Text>:null}
             </View>
 
-            <View style={styles.button_off_on}>
-              <Text style={styles.switch}>{var_switch}</Text>
-              <Switch
-                trackColor={{ false: '#F8FFE5', true: '#2EBFA5' }}
-                thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
-                ios_backgroundColor="#3e3e3e"
-                onValueChange={toggleSwitch}
-                value={isEnabled}
-              />
-            </View>
 
-            <View>
-              <Text style={styles.labelCep}>cep</Text>
-              <TextInput
-                keyboardType='number-pad'
-                ref={cep}
-                value={values.cep}
-                style={styles.inputCep}
-                placeholder="85660-000"
-                onChangeText={handleChange('cep')}
-                onBlur={() => setFieldTouched('cep', true)}
-              />
-              {errors.cep && touched.cep && (
-                <Text>{errors.cep}</Text>
-              )}
+            <View style={{display: 'flex', flexDirection: 'row', paddingTop: 8}}>
+              <View>
+                <Text style={styles.labelCep}>cep</Text>
+                <TextInput
+                  keyboardType='number-pad'
+                  ref={cep}
+                  value={values.cep}
+                  style={styles.inputCep}
+                  placeholder="85660-000"
+                  onChangeText={handleChange('cep')}
+                  onBlur={() => setFieldTouched('cep', true)}
+                />
+                {errors.cep && touched.cep && (
+                  <Text>{errors.cep}</Text>
+                  )}
+              </View>
+
+              <View style={styles.button_off_on}>
+                <Text style={styles.switch}>{var_switch}</Text>
+                <Switch
+                  trackColor={{ false: '#F8FFE5', true: '#2EBFA5' }}
+                  thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
+                  ios_backgroundColor="#3e3e3e"
+                  onValueChange={toggleSwitch}
+                  value={isEnabled}
+                  style={{paddingTop: 8}}
+                />
+              </View>
             </View>
 
             <View style={{ flexDirection: 'row' }}>
@@ -201,7 +207,7 @@ function Form() {
                 onChangeText={handleChange('district')}
                 onBlur={() => setFieldTouched('district', true)}
               />
-              {errors.district && touched.district && <Text>{errors.district}</Text>}
+              {errors.district && touched.district ? <Text>{errors.district}</Text>:null}
 
               <TextInput
                 keyboardType='number-pad'
@@ -212,7 +218,7 @@ function Form() {
                 onChangeText={handleChange('number')}
                 onBlur={() => setFieldTouched('number', true)}
               />
-              {errors.number && touched.number && <Text>{errors.number}</Text>}
+              {errors.number && touched.number ? <Text>{errors.number}</Text>:null}
             </View>
 
             <View>
@@ -225,7 +231,7 @@ function Form() {
                 onChangeText={handleChange('street')}
                 onBlur={() => setFieldTouched('street', true)}
               />
-              {errors.street && touched.street && <Text>{errors.street}</Text>}
+              {errors.street && touched.street ? <Text>{errors.street}</Text>:null}
             </View>
 
             <View>
@@ -238,11 +244,11 @@ function Form() {
                 onChangeText={handleChange('complement')}
                 onBlur={() => setFieldTouched('complement', true)}
               />
-              {errors.complement && touched.complement && <Text>{errors.complement}</Text>}
+              {errors.complement && touched.complement ? <Text>{errors.complement}</Text>:null}
             </View>
 
             <View style={styles.footer}>
-              <GreenLargeButton onPress={handleAppointmentCreate} title="confirmar" />
+              <GreenLargeButton onPress={(values)=>handleAppointmentCreate(values)} title="confirmar" />
             </View>
           </View>
         )}

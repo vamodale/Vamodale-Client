@@ -5,12 +5,12 @@ export const styles = StyleSheet.create({
     container: {
         display: 'flex',
         height: 40,
-        backgroundColor: theme.colors.green,
+        backgroundColor: theme.colors.redError,
         borderRadius: 20,
         alignItems: 'center',
         justifyContent: 'center',
-        width: '100%',
         minWidth: '48%'
+
     },
     text: {
         fontFamily: theme.fonts.medium,       

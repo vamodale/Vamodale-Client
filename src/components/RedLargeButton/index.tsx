@@ -12,7 +12,7 @@ type Props = TouchableOpacityProps & {
     title: string;
 }
 
-export function GreenLargeButton({ title, ...rest }: Props) {
+export function RedLargeButton({ title, ...rest }: Props) {
     return (
         <View>
             <TouchableOpacity
