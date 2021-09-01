@@ -14,7 +14,13 @@ export const globalStyles = StyleSheet.create({
   },
 
   lightBackground: {
-    flex: 1, 
+    flex: 1,
     backgroundColor: theme.colors.lightBackground
+  },
+
+  purpleBackGround: {
+    flex: 1,
+    backgroundColor: theme.colors.darkPurple,
+    display: 'flex',
   }
 });
