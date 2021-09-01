@@ -27,10 +27,6 @@ export const ProfileContent:React.FC = ({children}) => {
       <View style={styles.separator}/>
       <View style={styles.attributes}>
         <View style={styles.atributeWrapper}>
-          <Text style={styles.attributeLabel}>idade</Text>
-          <Text style={styles.attribute}>{user.idade}</Text>
-        </View>
-        <View style={styles.atributeWrapper}>
           <Text style={styles.attributeLabel}>cidade</Text>
           <Text style={styles.attribute}>{user.city}</Text>
         </View>

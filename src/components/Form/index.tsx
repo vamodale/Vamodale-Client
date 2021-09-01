@@ -54,10 +54,10 @@ function Form() {
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
-  const var_switch = isEnabled ? 'Competitivo' : 'Casual'
+  const var_switch = isEnabled ? 'competitivo' : 'casual'
 
   return (
-    <View style={globalStyles.purpleBackGround}>
+    <View style={globalStyles.purpleBackground}>
       <Formik
         initialValues={{
           appointmentName: '',
@@ -74,7 +74,7 @@ function Form() {
         onSubmit={values => {
           alert(values);
         }}
-        validationSchema={FormSchema}>
+        >
         {({
           values,
           handleChange,
@@ -160,31 +160,35 @@ function Form() {
               {errors.date && touched.date && <Text>{errors.date}</Text>}
             </View>
 
-            <View style={styles.button_off_on}>
-              <Text style={styles.switch}>{var_switch}</Text>
-              <Switch
-                trackColor={{ false: '#F8FFE5', true: '#2EBFA5' }}
-                thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
-                ios_backgroundColor="#3e3e3e"
-                onValueChange={toggleSwitch}
-                value={isEnabled}
-              />
-            </View>
 
-            <View>
-              <Text style={styles.labelCep}>cep</Text>
-              <TextInput
-                keyboardType='number-pad'
-                ref={cep}
-                value={values.cep}
-                style={styles.inputCep}
-                placeholder="85660-000"
-                onChangeText={handleChange('cep')}
-                onBlur={() => setFieldTouched('cep', true)}
-              />
-              {errors.cep && touched.cep && (
-                <Text>{errors.cep}</Text>
-              )}
+            <View style={{display: 'flex', flexDirection: 'row', paddingTop: 8}}>
+              <View>
+                <Text style={styles.labelCep}>cep</Text>
+                <TextInput
+                  keyboardType='number-pad'
+                  ref={cep}
+                  value={values.cep}
+                  style={styles.inputCep}
+                  placeholder="85660-000"
+                  onChangeText={handleChange('cep')}
+                  onBlur={() => setFieldTouched('cep', true)}
+                />
+                {errors.cep && touched.cep && (
+                  <Text>{errors.cep}</Text>
+                  )}
+              </View>
+
+              <View style={styles.button_off_on}>
+                <Text style={styles.switch}>{var_switch}</Text>
+                <Switch
+                  trackColor={{ false: '#F8FFE5', true: '#2EBFA5' }}
+                  thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
+                  ios_backgroundColor="#3e3e3e"
+                  onValueChange={toggleSwitch}
+                  value={isEnabled}
+                  style={{paddingTop: 8}}
+                />
+              </View>
             </View>
 
             <View style={{ flexDirection: 'row' }}>

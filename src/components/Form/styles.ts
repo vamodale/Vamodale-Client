@@ -4,11 +4,10 @@ import { theme } from '../../global/styles/theme';
 
 export const styles = StyleSheet.create({
     button_off_on: {
-        flex: 1,
         justifyContent: 'center',
-        alignItems: 'center',
-        flexDirection: 'row',
-        paddingVertical: 8
+        alignItems: 'flex-start',
+        flexDirection: 'column',
+        paddingLeft: 16
     },
 
     footer: {
@@ -260,7 +259,6 @@ export const styles = StyleSheet.create({
         fontFamily: theme.fonts.regular,
         fontSize: 16,
         color: theme.colors.white,
-        paddingRight: 30,
-        marginTop: 5,
+        marginTop: -4
     },
 });
