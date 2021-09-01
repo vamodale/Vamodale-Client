@@ -21,13 +21,8 @@ export const globalStyles = StyleSheet.create({
     flex: 1,
     backgroundColor: theme.colors.lightBackground
   },
-
-  purpleBackGround: {
-    flex: 1,
-    backgroundColor: theme.colors.darkPurple,
-    display: 'flex',
   purpleBackground: {
     flex: 1,
     backgroundColor: theme.colors.purple
   }
-}});
+});
