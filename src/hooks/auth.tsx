@@ -107,6 +107,7 @@ function AuthProvider({ children }: AuthProviderProps ){
           longitude: position.coords.longitude
         } ).then( geo => {
           userBody.cidade = geo[0].subregion
+          user.city = geo[0].subregion
         } )
       }
     })

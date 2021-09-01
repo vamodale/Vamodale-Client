@@ -18,10 +18,11 @@ import { globalStyles } from '../../global/styles/globals';
 import { GreenLargeButton } from '../../components/GreenLargeButton';
 import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
+import { useAuth } from '../../hooks/auth'
 
 export function Home() {
   const [events, setEvents] = useState([])
-
+  const { user } = useAuth()
   const navegation = useNavigation();
   
   get_events().then( events => {
@@ -44,7 +45,7 @@ export function Home() {
             <View style={styles.header}>
               <View style={styles.headerContent}>
                 <MaterialIcons style={globalStyles.headerLeftIcon} name="menu-open" size={24} color={theme.colors.white} onPress={handleDrawer}/>
-                <Text style={globalStyles.headerTitle}>dois vizinhos</Text>
+                <Text style={globalStyles.headerTitle}>{user.city}</Text>
               </View>
               <View style={styles.headerContent}>
                 <Search style={styles.search}/>
