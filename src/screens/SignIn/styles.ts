@@ -25,8 +25,8 @@ export const styles = StyleSheet.create({
         color: theme.colors.white,
         fontSize: 16,
         textAlign: 'center',
+        marginTop: -20,
         marginBottom: 64,
-        fontFamily: theme.fonts.semibold,
-        lineHeight: 24
+        fontFamily: theme.fonts.medium,
     }
 });

@@ -20,7 +20,6 @@ export const styles = StyleSheet.create({
   },
 
   footerText: {
-    alignSelf: 'center',
     fontFamily: theme.fonts.medium,
     color: theme.colors.purple,
     fontSize: 16,

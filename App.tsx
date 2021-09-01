@@ -8,6 +8,8 @@ import { useFonts } from 'expo-font';
 import { Routes } from './src/routes';
 import { theme } from './src/global/styles/theme';
 
+import { AuthProvider } from './src/hooks/auth'
+
 export default function App() {
   const [fontsLoaded] = useFonts({
     Poppins_400Regular,
@@ -28,7 +30,9 @@ export default function App() {
         translucent
       />
       <View style={{flex: 1, backgroundColor: theme.colors.lightBackground}}>
-        <Routes />
+        <AuthProvider>
+          <Routes />
+        </AuthProvider>
       </View>
     </>
   );

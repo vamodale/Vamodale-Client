@@ -7,7 +7,7 @@ import {
 import { Background } from '../../components/Header/Background';
 import { Search } from '../../components/Header/Search';
 import { Add } from '../../components/Header/Add';
-import { Event } from '../../components/Event';
+import { Event } from '../../components/EventCard';
 
 import { MaterialIcons } from '@expo/vector-icons';
 import { styles } from './styles';
@@ -23,6 +23,7 @@ export function Home() {
       //@ts-ignore
       navegation.navigate('AppointmentCreate');
   }
+
     return (
         <View style={globalStyles.lightBackground} >
           <Background>
@@ -40,7 +41,7 @@ export function Home() {
           <View style={{padding: 24}}>
             <Event/>
           </View>
-          <View style={styles.footer}>
+          <View style={styles.footerText}>
             <Text style={styles.footerText}>Não encontrou o que procurava?</Text>
             <GreenLargeButton onPress={handleAppointmentCreate} title="cadastre um evento"/>
           </View>
