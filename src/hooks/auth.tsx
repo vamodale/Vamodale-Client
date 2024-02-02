@@ -46,8 +46,8 @@ function AuthProvider({ children }: AuthProviderProps ){
 
   async function signInWithGoogle() {
     try {
-      const CLIENT_ID = '95332184828-r8rlcb30ipfbf6udg2t0euq5rd9mdi6s.apps.googleusercontent.com';
-      const REDIRECT_URI = 'https://auth.expo.io/@kastango/VAMODALE';
+      const CLIENT_ID = '211756700388-fn9b8oevnbrnd0rdsm3eql8g83nshsci.apps.googleusercontent.com';
+      const REDIRECT_URI = 'https://auth.expo.io/@nagutao/letsmove';
       const RESPONSE_TYPE = 'token';
       const SCOPE = encodeURI('profile email');
 
