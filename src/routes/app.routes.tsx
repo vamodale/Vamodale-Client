@@ -17,6 +17,7 @@ import { MyEvents } from '../screens/MyEvents';
 import { Profile } from '../screens/MyProfile';
 import { AppointmentCreate } from '../screens/AppointmentsCreate';
 import { AppointmentInfo } from '../screens/AppointmentInfo';
+import { Notification } from '../screens/Notifications';
 
 import { useAuth } from '../hooks/auth';
 
@@ -24,13 +25,19 @@ import { useAuth } from '../hooks/auth';
 const pages = {
   profile: {
     icon: "face" as const,
-    label: 'meu perfil',
+    label: 'My Profile',
     screen: Profile
+  },
+
+  notifications: {
+    icon: "notifications-none" as const,
+    label: "Notifications",
+    screen: Notification
   },
 
   myEvents: {
     icon: 'today' as const,
-    label: 'meus eventos',
+    label: 'My Events',
     screen: MyEvents
   },
 }
@@ -60,8 +67,8 @@ function CustomDrawerContent(props) {
         <View style={styles.header}>
           <Image style={styles.profilePicture} source={{uri: user.photo }}/>
           <View style={styles.textContent}>
-            <Text style={styles.title}>oi {user.nickname},</Text>
-            <Text style={styles.subtitle}>Tudo certo?</Text>
+            <Text style={styles.title}>hello {user.nickname},</Text>
+            <Text style={styles.subtitle}>Whats up?</Text>
           </View>
         </View>
         </>
@@ -127,6 +134,11 @@ export function AppRoutes() {
         name="EditProfile" options={{
           drawerItemStyle: styles.drawerHome
         }} component={EditProfile}
+        />
+        <Drawer.Screen
+        name="Notifications" options={{
+          drawerItemStyle: styles.drawerHome
+        }} component={Notification}
         />
     </Drawer.Navigator>
   );

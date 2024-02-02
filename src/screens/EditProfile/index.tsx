@@ -5,8 +5,8 @@ import {
 } from 'react-native';
 
 import { Background } from '../../components/Header/Background';
-import {ProfileContent} from '../../components/ProfileContent';
-import {GreenLargeButton} from '../../components/GreenLargeButton';
+import { ProfileContent } from '../../components/ProfileContent';
+import { GreenLargeButton } from '../../components/GreenLargeButton';
 import { RedLargeButton } from '../../components/RedLargeButton';
 
 
@@ -16,34 +16,35 @@ import { theme } from '../../global/styles/theme';
 import { globalStyles } from '../../global/styles/globals';
 
 import { useNavigation } from '@react-navigation/native';
+import { ProfileEditContent } from '../../components/ProfileEditContent';
 
 export function EditProfile() {
-  const navegation = useNavigation();
+    const navegation = useNavigation();
 
 
     return (
-        <View style={globalStyles.lightBackground}>
+        <View style={globalStyles.purpleBackground}>
             <Background>
                 <View style={styles.header}>
                     <View style={styles.headerContent}>
-                        <MaterialIcons 
+                        <MaterialIcons
                             //@ts-ignore
-                            onPress={() => navegation.goBack("order")} 
-                            style={globalStyles.headerLeftIcon} 
-                            name="chevron-left" 
-                            size={24} 
+                            onPress={() => navegation.goBack("order")}
+                            style={globalStyles.headerLeftIcon}
+                            name="chevron-left"
+                            size={24}
                             color={theme.colors.white}
                         />
-                        <Text style={globalStyles.headerTitle}>editar Perfil</Text>
+                        <Text style={globalStyles.headerTitle}>Edit Profile</Text>
                     </View>
                 </View>
             </Background>
-                <ProfileContent/>
-                <View style={styles.buttons}>
-                <GreenLargeButton title="confirmar"/>
-                <View style={styles.buttonSeparation}/>
-                <RedLargeButton title="cancelar"/>
-                </View>
+            <ProfileEditContent />
+            <View style={styles.buttons}>
+                <GreenLargeButton title="confirm" />
+                <View style={styles.buttonSeparation} />
+                <RedLargeButton title="cancel" />
+            </View>
         </View>
     );
 }

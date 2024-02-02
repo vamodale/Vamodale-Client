@@ -14,6 +14,7 @@ import { theme } from '../../global/styles/theme';
 import { globalStyles } from '../../global/styles/globals';
 
 import { useNavigation } from '@react-navigation/native';
+import { EditProfile } from '../EditProfile';
 
 
 
@@ -34,7 +35,7 @@ export function Profile() {
                             size={24} 
                             color={theme.colors.white}
                         />
-                        <Text style={globalStyles.headerTitle}>meu perfil</Text>
+                        <Text style={globalStyles.headerTitle}>My Profile</Text>
                     </View>
                     <View style={styles.headerContent}>
                         <MaterialIcons 
@@ -48,7 +49,7 @@ export function Profile() {
             </Background>
                 <ProfileContent/>
                     <View style={{paddingHorizontal: 24}}>
-                        <GreenLargeButton title="editar perfil" onPress={() =>  navegation.navigate("EditProfile")}/>
+                        <GreenLargeButton title="Edit Profile" onPress={() =>  navegation.navigate("EditProfile", EditProfile)}/>
                     </View>
         </View>
     );

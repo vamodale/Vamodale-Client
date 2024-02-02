@@ -25,9 +25,9 @@ export function Home() {
   const { user } = useAuth()
   const navegation = useNavigation();
   
-  get_events().then( events => {
-    setEvents(events)
-  } )
+ //get_events().then( events => {
+ //  setEvents(events)
+ //} )
 
   function handleAppointmentCreate() {
       //@ts-ignore
@@ -61,9 +61,9 @@ export function Home() {
             }
           </View>
           <View>
-            <Text style={styles.footerText}>Não encontrou o que procurava?</Text>
+            <Text style={styles.footerText}>Didn't find what you were looking for?</Text>
             <View style={{paddingHorizontal: 24}}>
-              <GreenLargeButton onPress={handleAppointmentCreate} title="cadastre um evento"/>
+              <GreenLargeButton onPress={handleAppointmentCreate} title="create an event"/>
             </View>
           </View>
         </View>
