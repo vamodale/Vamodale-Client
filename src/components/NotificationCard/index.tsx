@@ -9,7 +9,7 @@ import { useNavigation } from '@react-navigation/native';
 import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale';
 
-export const Notification = (props: any) => {
+export const NotificationCard = (props: any) => {
     const navegation = useNavigation();
 
     function handleAppointmentInfo() {

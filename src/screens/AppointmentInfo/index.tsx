@@ -19,13 +19,22 @@ import { useNavigation } from '@react-navigation/native';
 import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale';
 import { useEffect } from 'react';
+import { get_events } from '../../services/get_event';
 
 export function AppointmentInfo( {route, navigation } ) {
   const navegation = useNavigation();
-  const {event} = route.params
-  const [jogadores, setJogadores] = useState(event.jogadores)
+  const {eventId} = route.params
+  const [jogadores, setJogadores] = useState([])
+  const [event, setEvent] = useState(null)
 
-  console.log(jogadores)
+  useEffect(()=>{
+    get_events(eventId).then(currentEvent => {
+      currentEvent.date = new Date(currentEvent.date)
+
+      setEvent(currentEvent)
+      setJogadores(currentEvent?.players)
+    })
+  },[route])
 
   String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
@@ -33,17 +42,18 @@ export function AppointmentInfo( {route, navigation } ) {
   
   return (
     <View style={globalStyles.purpleBackground} >
+      {event && <>
       <Background>
           <View style={styles.header}>
             <View style={styles.headerContent}>
               <MaterialIcons 
-                onPress={() => navegation.goBack()} 
+                onPress={() => navegation.navigate("Home")} 
                 style={globalStyles.headerLeftIcon} 
                 name="chevron-left" 
                 size={24} 
                 color={theme.colors.white}
               />
-              <Text style={globalStyles.headerTitle}>dois vizinhos</Text>
+              <Text style={globalStyles.headerTitle}>{event.address.city}</Text>
           </View>
           <View style={styles.headerContent}>
               <MaterialIcons 
@@ -57,20 +67,20 @@ export function AppointmentInfo( {route, navigation } ) {
         </Background>
       <View style={{padding: 24}}>
         <View style={styles.container}>
-          <Text style={styles.title}>{event.nome}</Text>
+          <Text style={styles.title}>{event.name}</Text>
           <View>
           <View style={styles.infoWrapper}>
               <MaterialIcons name="emoji-events" size={24} color={theme.colors.white}/>
-              <Text style={styles.infoText}>{event.esporte}</Text>
+              <Text style={styles.infoText}>{event.sport}</Text>
             </View>
             <View style={styles.infoWrapper}>
               <MaterialIcons name="watch-later" size={24} color={theme.colors.white}/>
-              <Text style={styles.infoText}>{format(event.data, 'EEEE', {locale: ptBR}).capitalize()}, {event.data.getDate().toLocaleString('pt-BR', {minimumIntegerDigits: 2})}/{event.data.getMonth().toLocaleString('pt-BR', {minimumIntegerDigits: 2})} - às {event.data.getHours().toLocaleString('pt-BR', {minimumIntegerDigits: 2})}h{event.data.getMinutes().toLocaleString('pt-BR', {minimumIntegerDigits: 2})}</Text>
+              <Text style={styles.infoText}>{format(event.date, 'EEEE', {locale: ptBR}).capitalize()}, {event.date.getDate().toLocaleString('pt-BR', {minimumIntegerDigits: 2})}/{event.date.getMonth().toLocaleString('pt-BR', {minimumIntegerDigits: 2})} - às {event.date.getHours().toLocaleString('pt-BR', {minimumIntegerDigits: 2})}h{event.date.getMinutes().toLocaleString('pt-BR', {minimumIntegerDigits: 2})}</Text>
             </View>
             <View style={styles.infoWrapper}>
               <View style={styles.info}>
                 <MaterialIcons name="room" size={24} color={theme.colors.white}/>
-                <Text style={styles.infoText}>{event.endereco.rua}, {event.endereco.numero}, {event.endereco.bairro} - {event.endereco.complemento}</Text>
+                <Text style={styles.infoText}>{event.address.street}, {event.address.number}, {event.address.neighborhood} - {event.address.complement}</Text>
               </View>
               <View>
                 <MaterialIcons name="link" size={24} color={theme.colors.white}/>
@@ -84,11 +94,11 @@ export function AppointmentInfo( {route, navigation } ) {
           })
         }
         {
-          event.num_vagas - jogadores.length > 0?
+          !event.is_owner && event.positions_number - jogadores.length > 0?
           <Join event={event} addJogador={setJogadores}/>: null
         }
-        <Slot slots={event.num_vagas - jogadores.length}/>
-      </View>
+        <Slot slots={event.positions_number - jogadores.length}/>
+      </View></>}
     </View>
     );
 }

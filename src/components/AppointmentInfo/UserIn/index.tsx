@@ -24,11 +24,11 @@ export const UserIn = ( props ) => {
         <View style={styles.textWrapper}>
           <View style={styles.names}>
             <Text style={styles.nickname}>
-              {props.player.apelido}
+              {props.player.nickname}
             </Text>
             <Text style={styles.name}> | </Text>
             <Text style={styles.name}>
-            {props.player.nome}
+            {props.player.name}
             </Text>
           </View>
         </View>

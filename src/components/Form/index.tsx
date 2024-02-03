@@ -9,15 +9,16 @@ import { useNavigation } from '@react-navigation/native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { styles } from './styles';
 import { globalStyles } from '../../global/styles/globals';
+import { create_event } from '../../services/create_event';
 
 function Form() {
-    const appointmentName = useRef(null);
+    const name = useRef(null);
 
     const [selectedSport, setSelectedSport] = useState();
 
-    const slots = useRef(null);
-    const cep = useRef(null);
-    const district = useRef(null);
+    const positions_number = useRef(null);
+    const zipcode = useRef(null);
+    const neighborhood = useRef(null);
     const number = useRef(null);
     const street = useRef(null);
     const complement = useRef(null);
@@ -25,8 +26,9 @@ function Form() {
     const hour = useRef(null);
 
     const sports = [
+        { value: "soccer" },
+        { value: "futsal" },
         { value: "basketball" },
-        { value: "football" },
         { value: "handball" },
         { value: "volleyball" },
         { value: "other" }
@@ -34,18 +36,20 @@ function Form() {
 
     const navegation = useNavigation();
 
-    function handleAppointmentCreate(values) {
+    async function handleAppointmentCreate(values) {
         //@ts-ignore
-        values.data = values.date + values.hour
-        setEvent(values)
-        navegation.navigate('AppointmentInfo', { event: event });
+        values.event_date = values.date + "T" + values.hour
+        delete values.date
+        delete values.hour
+        await create_event(values, isEnabled ? 2 : 1)
+        navegation.navigate('MyEvents');
     }
 
     const FormSchema = Yup.object().shape({
-        appointmentName: Yup.string().required(''),
-        slots: Yup.number().min(2, 'valor mínimo ${min} vagas').max(30, 'valor máximo ${max} vagas').required(''),
-        cep: Yup.string().required(''),
-        district: Yup.string().required(''),
+        name: Yup.string().required(''),
+        positions_number: Yup.number().min(2, 'valor mínimo ${min} vagas').max(30, 'valor máximo ${max} vagas').required(''),
+        zipcode: Yup.string().required(''),
+        neighborhood: Yup.string().required(''),
         number: Yup.number().required(''),
         street: Yup.string().required(''),
         complement: Yup.string(),
@@ -66,19 +70,19 @@ function Form() {
         }]}>
             <Formik
                 initialValues={{
-                    appointmentName: '',
+                    name: '',
                     sport: 'soccer',
-                    slots: '',
-                    cep: '',
-                    district: '',
+                    positions_number: '',
+                    zipcode: '',
+                    neighborhood: '',
                     number: '',
                     street: '',
                     complement: '',
                     date: '',
                     hour: '',
                 }}
-                onSubmit={values => {
-                    alert(values);
+                onSubmit={async values => {
+                    await handleAppointmentCreate(values)
                 }}
             >
                 {({
@@ -93,12 +97,12 @@ function Form() {
                         <View>
                             <Text style={styles.attributeLabel}>event name</Text>
                             <TextInput
-                                onChangeText={handleChange('appointmentName')}
+                                onChangeText={handleChange('name')}
                                 style={styles.inputText}
-                                value={values.appointmentName}
+                                value={values.name}
                                 placeholder="Rodrigo & cia"
                             />
-                            {errors.appointmentName && touched.appointmentName ? <Text>{errors.appointmentName}</Text> : null}
+                            {errors.name && touched.name ? <Text>{errors.name}</Text> : null}
                         </View>
 
                         <View style={{ flexDirection: 'row', width: '100%', justifyContent: 'space-between', marginTop: 7 }}>
@@ -123,23 +127,23 @@ function Form() {
 
                             </View>
 
-                            <View style={{ flexDirection: 'column' }}>
-                                <Text style={styles.attributeLabel}>slots</Text>
+                            <View style={{ flexDirection: 'column', width: '40%'  }}>
+                                <Text style={styles.attributeLabel}>Slots</Text>
                                 <TextInput
                                     keyboardType='number-pad'
-                                    ref={slots}
-                                    value={values.slots}
+                                    ref={positions_number}
+                                    value={values.positions_number}
                                     style={styles.inputText}
                                     placeholder="mín: 2, max: 30"
-                                    onChangeText={handleChange('slots')}
-                                    onBlur={() => setFieldTouched('slots', true)}
+                                    onChangeText={handleChange('positions_number')}
+                                    onBlur={() => setFieldTouched('positions_number', true)}
                                 />
-                                {errors.slots && touched.slots ? <Text>{errors.slots}</Text> : null}
+                                {errors.positions_number && touched.positions_number ? <Text>{errors.positions_number}</Text> : null}
                             </View>
                         </View>
 
                         <View style={{ flexDirection: 'row', width: '100%', justifyContent: 'space-between' }}>
-                            <View style={{ flexDirection: 'column', width: '30%' }}>
+                            <View style={{ flexDirection: 'column', width: '40%' }}>
                                 <Text style={styles.attributeLabel}>hour</Text>
                                 <TextInput
                                     keyboardType='number-pad'
@@ -153,7 +157,7 @@ function Form() {
                                 {errors.hour && touched.hour ? <Text>{errors.hour}</Text> : null}
                             </View>
 
-                            <View style={{ flexDirection: 'column', width: '50%' }}>
+                            <View style={{ flexDirection: 'column', width: '58%' }}>
                                 <Text style={styles.attributeLabel}>data</Text>
                                 <TextInput
                                     keyboardType='number-pad'
@@ -173,15 +177,15 @@ function Form() {
                                 <Text style={styles.attributeLabel}>zip code</Text>
                                 <TextInput
                                     keyboardType='number-pad'
-                                    ref={cep}
-                                    value={values.cep}
+                                    ref={zipcode}
+                                    value={values.zipcode}
                                     style={[styles.inputText, { textAlign: 'center' }]}
                                     placeholder="85660-000"
-                                    onChangeText={handleChange('cep')}
-                                    onBlur={() => setFieldTouched('cep', true)}
+                                    onChangeText={handleChange('zipcode')}
+                                    onBlur={() => setFieldTouched('zipcode', true)}
                                 />
-                                {errors.cep && touched.cep && (
-                                    <Text>{errors.cep}</Text>
+                                {errors.zipcode && touched.zipcode && (
+                                    <Text>{errors.zipcode}</Text>
                                 )}
                             </View>
 
@@ -197,21 +201,34 @@ function Form() {
                             </View>
                         </View>
 
+                        <View>
+                            <Text style={styles.attributeLabel}>street</Text>
+                            <TextInput
+                                ref={street}
+                                value={values.street}
+                                style={styles.inputText}
+                                placeholder="Avenida México"
+                                onChangeText={handleChange('street')}
+                                onBlur={() => setFieldTouched('street', true)}
+                            />
+                            {errors.street && touched.street ? <Text>{errors.street}</Text> : null}
+                        </View>
+
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                            <View style={{ flexDirection: 'column', width: '70%' }}>
-                                <Text style={styles.attributeLabel}>district</Text>
+                            <View style={{ flexDirection: 'column', width: '68%' }}>
+                                <Text style={styles.attributeLabel}>neighborhood</Text>
                                 <TextInput
-                                    ref={district}
-                                    value={values.district}
+                                    ref={neighborhood}
+                                    value={values.neighborhood}
                                     style={styles.inputText}
                                     placeholder="Altas Torres"
-                                    onChangeText={handleChange('district')}
-                                    onBlur={() => setFieldTouched('district', true)}
+                                    onChangeText={handleChange('neighborhood')}
+                                    onBlur={() => setFieldTouched('neighborhood', true)}
                                 />
-                                {errors.district && touched.district ? <Text>{errors.district}</Text> : null}
+                                {errors.neighborhood && touched.neighborhood ? <Text>{errors.neighborhood}</Text> : null}
                             </View>
 
-                            <View style={{ flexDirection: 'column' }}>
+                            <View style={{ flexDirection: 'column', width: '30%'  }}>
                                 <Text style={styles.attributeLabel}>number</Text>
                                 <TextInput
                                     keyboardType='number-pad'
@@ -228,19 +245,6 @@ function Form() {
 
 
 
-                        <View>
-                            <Text style={styles.attributeLabel}>street</Text>
-                            <TextInput
-                                ref={street}
-                                value={values.street}
-                                style={styles.inputText}
-                                placeholder="Avenida México"
-                                onChangeText={handleChange('street')}
-                                onBlur={() => setFieldTouched('street', true)}
-                            />
-                            {errors.street && touched.street ? <Text>{errors.street}</Text> : null}
-                        </View>
-
                         <View style={{ marginTop: 7 }}>
                             <Text style={styles.attributeLabel}>complement</Text>
                             <TextInput
@@ -255,7 +259,7 @@ function Form() {
                         </View>
 
                         <View style={styles.footer}>
-                            <GreenLargeButton onPress={(values) => handleAppointmentCreate(values)} title="confirm" />
+                            <GreenLargeButton onPress={handleSubmit} title="confirm" />
                         </View>
                     </View>
                 )}

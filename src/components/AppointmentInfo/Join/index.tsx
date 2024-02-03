@@ -7,14 +7,13 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { join_event } from '../../../services/join_event';
 import { useState } from 'react';
 import { get_events } from '../../../services/get_event';
+import { useNavigation } from '@react-navigation/native';
 
 export const Join = ({event, addJogador}) => {
+  const navegation = useNavigation();
   function handleEventJoin(){
     join_event( event.id ).then( _ => {
-      event = get_events(event.id)
-      event.then( res => {
-        addJogador(res.jogadores)
-      } )
+      navegation.navigate('AppointmentInfo', {eventId: event.id})
     })
   }
 
@@ -27,11 +26,11 @@ export const Join = ({event, addJogador}) => {
     </TouchableOpacity>
     <View style={styles.textWrapper}>
         <Text style={styles.nickname}>
-          Compareça no evento
+          Join the event
         </Text>
       <View style={styles.subtitle}>
-        <Text style={styles.click}>clique aqui </Text>
-        <Text style={styles.plustext}>e participe</Text>
+        <Text style={styles.click}>click here </Text>
+        <Text style={styles.plustext}>and have fun</Text>
       </View>
     </View>
   </View>

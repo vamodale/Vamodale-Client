@@ -7,7 +7,7 @@ import {
 import { Background } from '../../components/Header/Background';
 import { ProfileContent } from '../../components/ProfileContent';
 import { GreenLargeButton } from '../../components/GreenLargeButton';
-import { Notification as Card } from '../../components/NotificationCard';
+import { NotificationCard as Card } from '../../components/NotificationCard';
 
 import { MaterialIcons } from '@expo/vector-icons';
 import { styles } from './styles';

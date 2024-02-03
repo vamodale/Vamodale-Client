@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
     View,
     Text,
 } from 'react-native';
 
+import { getForegroundPermissionsAsync, requestForegroundPermissionsAsync, getCurrentPositionAsync } from 'expo-location'
 import { Background } from '../../components/Header/Background';
 import { Search } from '../../components/Header/Search';
 import { Add } from '../../components/Header/Add';
@@ -25,9 +26,24 @@ export function Home() {
   const { user } = useAuth()
   const navegation = useNavigation();
   
- //get_events().then( events => {
- //  setEvents(events)
- //} )
+  useEffect(()=>{
+    getForegroundPermissionsAsync().then(async permission => {
+      if ( !permission.granted ) {
+        permission = await requestForegroundPermissionsAsync()
+      }
+      if ( permission.granted ) {
+        const position = await getCurrentPositionAsync({accuracy: 5}) 
+        get_events('', position.coords.latitude, position.coords.longitude).then( events => {
+          setEvents(events)
+        } )
+      }else {
+        get_events().then( events => {
+          setEvents(events)
+        } )
+      }
+    })
+  }, [])
+
 
   function handleAppointmentCreate() {
       //@ts-ignore

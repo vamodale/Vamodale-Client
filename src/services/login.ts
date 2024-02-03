@@ -5,9 +5,7 @@ export async function reqLogin( openid, email ){
         'openid': openid,
         'email': email
     }
-    return await api.get(`auth/login`, {
-            params: body
-        }).then( (res) => {
+    return await api.post(`auth/login`, body).then( (res) => {
         if ( res.status === 200 ) return res.data
     } ).catch(erro=>{
         if ( erro.response.status == 400 ) return erro.response.status

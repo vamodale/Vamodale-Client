@@ -17,7 +17,7 @@ import { MyEvents } from '../screens/MyEvents';
 import { Profile } from '../screens/MyProfile';
 import { AppointmentCreate } from '../screens/AppointmentsCreate';
 import { AppointmentInfo } from '../screens/AppointmentInfo';
-import { Notification } from '../screens/Notifications';
+// import { Notification } from '../screens/Notifications';
 
 import { useAuth } from '../hooks/auth';
 
@@ -29,11 +29,11 @@ const pages = {
     screen: Profile
   },
 
-  notifications: {
-    icon: "notifications-none" as const,
-    label: "Notifications",
-    screen: Notification
-  },
+  // notifications: {
+  //   icon: "notifications-none" as const,
+  //   label: "Notifications",
+  //   screen: Notification
+  // },
 
   myEvents: {
     icon: 'today' as const,

@@ -12,11 +12,8 @@ export const Slot = ( props ) => {
       </View>
       <View style={styles.textWrapper}>
           <Text style={styles.nickname}>
-            +{props.slots} vagas para o evento
+            +{props.slots} positions still available
           </Text>
-        <View style={styles.subtitle}>
-          <Text style={styles.plustext}>ainda há {props.slots} vagas para rolar uma partidinha</Text>
-        </View>
       </View>
     </View>
   )

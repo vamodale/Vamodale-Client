@@ -12,7 +12,6 @@ export const styles = StyleSheet.create({
 
     footer: {
         alignItems: 'center',
-        paddingHorizontal: 24,
         marginTop: 50
     },
 

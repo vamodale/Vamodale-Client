@@ -53,23 +53,38 @@ function AuthProvider({ children }: AuthProviderProps ){
 
       const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${SCOPE}`;
 
-      const {type, params} = await AuthSession
-      .startAsync({ authUrl }) as AuthorizationResponse
+      // const {type, params} = await AuthSession
+      // .startAsync({ authUrl }) as AuthorizationResponse
 
-      console.log(type);
-      if (type === 'success') {
-        const response = await fetch(`https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${params.access_token}`);
-        const userInfo = await response.json();
+      // console.log(type);
+      if (1) {
+        // const response = await fetch(`https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${params.access_token}`);
+        // const userInfo = await response.json();
 
         const userLogged = {
-          id: userInfo.id,
-          name: userInfo.name,
-          nickname: userInfo.given_name,
-          email: userInfo.email,
-          photo: userInfo.picture,
-          city: 'Dois vizinhos'
+          id: "1",
+          name: "guilherme",
+          nickname: "gui",
+          email: "teste@teste.com",
+          photo: "https://ensina.rtp.pt/site-uploads/2021/01/SAPO-855x480.jpg",
+          city: "Braganca"
         };
-        
+
+        await getForegroundPermissionsAsync().then(async permission => {
+          if ( !permission.granted ) {
+            permission = await requestForegroundPermissionsAsync()
+          }
+          if ( permission.granted ) {
+            const position = await getCurrentPositionAsync({accuracy: 5}) 
+            console.log(position)
+            const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&result_type=locality&key=AIzaSyCcd5CQ9O5r5Bv9ifk8P_TPIWmdUS8KQCU`, {
+              mode: 'cors'
+            });
+            const retorno = await response.json();
+            userLogged.city = retorno.results[0].address_components[0].long_name
+          }
+        })
+
         await login( userLogged.id, userLogged.email ).then( async res => {
           if (res == 400) {
             await cadastro( userLogged )
@@ -78,7 +93,7 @@ function AuthProvider({ children }: AuthProviderProps ){
             await AsyncStorage.setItem('Authorization', res.Authorization);
           }
         } )
-        
+      
         setUser(userLogged);
         await AsyncStorage.setItem(userStorageKey, JSON.stringify(userLogged));
       }
@@ -90,27 +105,14 @@ function AuthProvider({ children }: AuthProviderProps ){
 
   async function cadastro(user) {
     let userBody = {
-      nome: user.name,
-      apelido: user.nickname,
+      name: user.name,
+      nickname: user.nickname,
       email: user.email,
       openid: user.id,
-      profile_picture: user.photo
+      profile_picture: user.photo,
+      city: user.city
     }
-    await getForegroundPermissionsAsync().then(async permission => {
-      if ( !permission.granted ) {
-        permission = await requestForegroundPermissionsAsync()
-      }
-      if ( permission.granted ) {
-        const position = await getLastKnownPositionAsync({}) 
-        await reverseGeocodeAsync( {
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude
-        } ).then( geo => {
-          userBody.cidade = geo[0].subregion
-          user.city = geo[0].subregion
-        } )
-      }
-    })
+    
     await reqCadastro( userBody ).then(token=>{
       console.log(token)
       AsyncStorage.setItem('Authorization', token.Authorization);

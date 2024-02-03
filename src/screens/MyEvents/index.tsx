@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     View,
     Text,
@@ -17,148 +17,31 @@ import { globalStyles } from '../../global/styles/globals';
 import { GreenLargeButton } from '../../components/GreenLargeButton';
 import { useNavigation } from '@react-navigation/native';
 import { ScrollView } from 'react-native-gesture-handler';
+import { get_my_events } from '../../services/get_my_event';
 
 export function MyEvents() {
     const navegation = useNavigation();
+    const [oldEvents, setOldEvents] = useState([])
+    const [nextEvents, setNextEvents] = useState([])
 
-    const oldEvents = [
-        {
-            nome: 'Evento teste 3',
-            data: 1706814240,
-            nome_criador: 'Eduardo da Silva',
-            esporte: 'Futebol',
-            inviting: 'Guilherme Tonello',
-            num_vagas: 5,
-            jogadores: [
-                {
-                    profile_picture: ''
-                }
-            ],
-            endereco: {
-                rua: 'Marechal Carmona',
-                numero: '6',
-                bairro: 'Centro',
-                complemento: '2° esq',
-            }
-        },
-        {
-            nome: 'Evento teste 3',
-            data: 1706814240,
-            nome_criador: 'Eduardo da Silva',
-            esporte: 'Futebol',
-            inviting: 'Guilherme Tonello',
-            num_vagas: 5,
-            jogadores: [
-                {
-                    profile_picture: ''
-                }
-            ],
-            endereco: {
-                rua: 'Marechal Carmona',
-                numero: '6',
-                bairro: 'Centro',
-                complemento: '2° esq',
-            }
-        },
-        {
-            nome: 'Evento teste 3',
-            data: 1706814240,
-            nome_criador: 'Eduardo da Silva',
-            esporte: 'Futebol',
-            inviting: 'Guilherme Tonello',
-            num_vagas: 5,
-            jogadores: [
-                {
-                    profile_picture: ''
-                }
-            ],
-            endereco: {
-                rua: 'Marechal Carmona',
-                numero: '6',
-                bairro: 'Centro',
-                complemento: '2° esq',
-            }
-        },
-        {
-            nome: 'Evento teste 3',
-            data: 1706814240,
-            nome_criador: 'Eduardo da Silva',
-            esporte: 'Futebol',
-            inviting: 'Guilherme Tonello',
-            num_vagas: 5,
-            jogadores: [
-                {
-                    profile_picture: ''
-                }
-            ],
-            endereco: {
-                rua: 'Marechal Carmona',
-                numero: '6',
-                bairro: 'Centro',
-                complemento: '2° esq',
-            }
-        },
-        {
-            nome: 'Evento teste 3',
-            data: 1706814240,
-            nome_criador: 'Eduardo da Silva',
-            esporte: 'Futebol',
-            inviting: 'Guilherme Tonello',
-            num_vagas: 5,
-            jogadores: [
-                {
-                    profile_picture: ''
-                }
-            ],
-            endereco: {
-                rua: 'Marechal Carmona',
-                numero: '6',
-                bairro: 'Centro',
-                complemento: '2° esq',
-            }
-        }
+    useEffect(async ()=>{
+        const events = await get_my_events()
 
-    ];
-    const nextEvents = [
-        {
-            nome: 'Evento teste 3',
-            data: 1706814240,
-            nome_criador: 'Eduardo da Silva',
-            esporte: 'Futebol',
-            inviting: 'Guilherme Tonello',
-            num_vagas: 5,
-            jogadores: [
-                {
-                    profile_picture: ''
-                }
-            ],
-            endereco: {
-                rua: 'Marechal Carmona',
-                numero: '6',
-                bairro: 'Centro',
-                complemento: '2° esq',
+        var old = []
+        var next = []
+
+        events.forEach(event => {
+            if (event.closed) {
+                old.push(event)
+            } else {
+                next.push(event)
             }
-        },
-        {
-            nome: 'Evento teste 3',
-            data: 1706814240,
-            nome_criador: 'Eduardo da Silva',
-            esporte: 'Futebol',
-            inviting: 'Guilherme Tonello',
-            num_vagas: 5,
-            jogadores: [
-                {
-                    profile_picture: ''
-                }
-            ],
-            endereco: {
-                rua: 'Marechal Carmona',
-                numero: '6',
-                bairro: 'Centro',
-                complemento: '2° esq',
-            }
-        }
-    ];
+        });
+
+        setOldEvents(old)
+        setNextEvents(next)
+
+    }, [])
 
     function handleAppointmentCreate() {
         //@ts-ignore
