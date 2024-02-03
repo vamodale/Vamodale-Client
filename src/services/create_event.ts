@@ -20,7 +20,7 @@ export async function create_event( event: any, type: any ){
         mode: 'cors'
     });
     const retorno = await response.json();
-    console.log(retorno)
+
     event.lat = retorno.results[0].geometry.location.lat
     event.lng = retorno.results[0].geometry.location.lng
     event.city = "braganca"

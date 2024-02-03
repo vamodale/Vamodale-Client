@@ -20,12 +20,15 @@ import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale';
 import { useEffect } from 'react';
 import { get_events } from '../../services/get_event';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export function AppointmentInfo( {route, navigation } ) {
   const navegation = useNavigation();
   const {eventId} = route.params
   const [jogadores, setJogadores] = useState([])
+  const [isIn, setIsIn] = useState(false)
   const [event, setEvent] = useState(null)
+  const userStorageKey = '@vamodale:user';
 
   useEffect(()=>{
     get_events(eventId).then(currentEvent => {
@@ -33,6 +36,9 @@ export function AppointmentInfo( {route, navigation } ) {
 
       setEvent(currentEvent)
       setJogadores(currentEvent?.players)
+      AsyncStorage.getItem(userStorageKey).then(user => {
+        setIsIn((currentEvent?.players.filter(jogador => jogador.id == user.id).length != 0))
+      })
     })
   },[route])
 
@@ -94,7 +100,7 @@ export function AppointmentInfo( {route, navigation } ) {
           })
         }
         {
-          !event.is_owner && event.positions_number - jogadores.length > 0?
+          ( !isIn && !event.is_owner && event.positions_number - jogadores.length > 0)?
           <Join event={event} addJogador={setJogadores}/>: null
         }
         <Slot slots={event.positions_number - jogadores.length}/>

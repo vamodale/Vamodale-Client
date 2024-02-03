@@ -16,7 +16,12 @@ export async function get_events( eventId = '', ltd="", lng=""){
         },
         params: params
     }).then( (res) => {
-        if ( res.status === 200 ) return res.data
+        if ( res.status === 200 ) {
+            if (res.data.error) {
+                return []
+            }
+            return res.data
+        }
     } ).catch(erro=>console.log(erro))
     return data
 }

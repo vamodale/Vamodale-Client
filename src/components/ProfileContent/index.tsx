@@ -14,7 +14,7 @@ export const ProfileContent: React.FC = ({ children }) => {
     return (
         <View style={styles.container} >
             <View style={styles.head}>
-                <Image style={styles.profilePicture} source={{ uri: user.photo }} />
+                <Image style={styles.profilePicture} source={{ uri: user.profile_picture }} />
                 <View style={styles.names}>
                     <Text style={styles.name}>
                         {user.name}

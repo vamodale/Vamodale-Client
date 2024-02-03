@@ -51,13 +51,13 @@ function AuthProvider({ children }: AuthProviderProps) {
             await login(password, email).then(async res => {
                 if (res !== 400) {
                     await AsyncStorage.setItem('Authorization', res.Authorization);
-
+                    
                     const userLogged = {
                         id: res.user.id,
                         name: res.user.name,
                         nickname: res.user.nickname,
                         email: res.user.email,
-                        photo: res.user.photo,
+                        profile_picture: res.user.profile_picture,
                         city: 'Bragança'
                     };
                     await getForegroundPermissionsAsync().then(async permission => {
@@ -90,7 +90,7 @@ function AuthProvider({ children }: AuthProviderProps) {
             nickname: user.nickname,
             email: user.email,
             openid: user.id,
-            profile_picture: user.photo,
+            profile_picture: user.profile_picture,
             city: 'Bragança'
         }
         await getForegroundPermissionsAsync().then(async permission => {
