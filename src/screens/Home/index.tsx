@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
     View,
     Text,
@@ -21,51 +21,53 @@ import { useState } from 'react';
 import { useAuth } from '../../hooks/auth'
 
 export function Home() {
-  const [events, setEvents] = useState([])
-  const { user } = useAuth()
-  const navegation = useNavigation();
-  
- //get_events().then( events => {
- //  setEvents(events)
- //} )
+    const [events, setEvents] = useState([])
+    const { user } = useAuth()
+    const navegation = useNavigation();
 
-  function handleAppointmentCreate() {
-      //@ts-ignore
-      navegation.navigate('AppointmentCreate');
-  }
+    useEffect(() => {
+        get_events().then(events => {
+            setEvents(events)
+        })
+    }, [])
 
-  function handleDrawer() {
-    //@ts-ignore
-    navegation.openDrawer();
-  }
+    function handleAppointmentCreate() {
+        //@ts-ignore
+        navegation.navigate('AppointmentCreate');
+    }
+
+    function handleDrawer() {
+        //@ts-ignore
+        navegation.openDrawer();
+    }
 
     return (
         <View style={globalStyles.lightBackground} >
-          <Background>
-            <View style={styles.header}>
-              <View style={styles.headerContent}>
-                <MaterialIcons style={globalStyles.headerLeftIcon} name="menu-open" size={24} color={theme.colors.white} onPress={handleDrawer}/>
-                <Text style={globalStyles.headerTitle}>{user.city}</Text>
-              </View>
-              <View style={styles.headerContent}>
-                <Search style={styles.search}/>
-                <Add/>
-              </View>
+            <Background>
+                <View style={styles.header}>
+                    <View style={styles.headerContent}>
+                        <MaterialIcons style={globalStyles.headerLeftIcon} name="menu-open" size={24} color={theme.colors.white} onPress={handleDrawer} />
+                        <Text style={globalStyles.headerTitle}>{user.city}</Text>
+                    </View>
+                    <View style={styles.headerContent}>
+                        <Search style={styles.search} />
+                        <Add />
+                    </View>
+                </View>
+            </Background>
+            <View style={{ padding: 24 }}>
+                {events !== undefined ?
+                    events.map(event => {
+                        return <Event event={event} />
+                    }) : null
+                }
             </View>
-          </Background>
-          <View style={{padding: 24}}>
-            { events !== undefined ? 
-              events.map(event => {
-                return <Event event={event}/>
-              }) : null
-            }
-          </View>
-          <View>
-            <Text style={styles.footerText}>Didn't find what you were looking for?</Text>
-            <View style={{paddingHorizontal: 24}}>
-              <GreenLargeButton onPress={handleAppointmentCreate} title="create an event"/>
+            <View>
+                <Text style={styles.footerText}>Didn't find what you were looking for?</Text>
+                <View style={{ paddingHorizontal: 24 }}>
+                    <GreenLargeButton onPress={handleAppointmentCreate} title="create an event" />
+                </View>
             </View>
-          </View>
         </View>
     );
 }

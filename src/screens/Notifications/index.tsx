@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     View,
     Text,
@@ -16,74 +16,21 @@ import { globalStyles } from '../../global/styles/globals';
 
 import { useNavigation } from '@react-navigation/native';
 import { ScrollView } from 'react-native-gesture-handler';
+import { get_notifications } from '../../services/get_notifications';
 
 
 
 export function Notification() {
     const navegation = useNavigation();
+    const [notifications, setNotifications] = useState([]);
 
-    const notifications = [
-        {
-            event: {
-                nome: 'Evento teste',
-                data: 1706814240,
-                nome_criador: 'Eduardo da Silva',
-                esporte: 'Futebol',
-                inviting: 'Guilherme Tonello',
-                endereco: {
-                    rua: 'Marechal Carmona',
-                    numero: '6',
-                    bairro: 'Centro',
-                    complemento: '2° esq',
-                }
-            }
-        },
-        {
-            event: {
-                nome: 'Evento teste',
-                data: 1706814240,
-                nome_criador: 'Eduardo da Silva',
-                esporte: 'Futebol',
-                inviting: 'Guilherme Tonello',
-                endereco: {
-                    rua: 'Marechal Carmona',
-                    numero: '6',
-                    bairro: 'Centro',
-                    complemento: '2° esq',
-                }
-            }
-        },
-        {
-            event: {
-                nome: 'Evento teste',
-                data: 1706814240,
-                nome_criador: 'Eduardo da Silva',
-                esporte: 'Futebol',
-                inviting: 'Guilherme Tonello',
-                endereco: {
-                    rua: 'Marechal Carmona',
-                    numero: '6',
-                    bairro: 'Centro',
-                    complemento: '2° esq',
-                }
-            }
-        },
-        {
-            event: {
-                nome: 'Evento teste',
-                data: 1706814240,
-                nome_criador: 'Eduardo da Silva',
-                esporte: 'Futebol',
-                inviting: 'Guilherme Tonello',
-                endereco: {
-                    rua: 'Marechal Carmona',
-                    numero: '6',
-                    bairro: 'Centro',
-                    complemento: '2° esq',
-                }
-            }
-        },
-    ];
+    useEffect(() => {
+        get_notifications().then(notifications => {
+            setNotifications(notifications)
+        })
+    }, [])
+
+    console.log(notifications)
 
     return (
         <View style={[globalStyles.lightBackground]}>
