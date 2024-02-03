@@ -22,7 +22,7 @@ export function AppointmentCreate() {
         <View style={styles.header}>
           <View style={styles.headerContent}>
             <MaterialIcons onPress={() => navegation.navigate("Home")} style={globalStyles.headerLeftIcon} name="chevron-left" size={24} color={theme.colors.white} />
-            <Text style={globalStyles.headerTitle}>cadastrar evento</Text>
+            <Text style={globalStyles.headerTitle}>create event</Text>
           </View>
         </View>
       </Background>

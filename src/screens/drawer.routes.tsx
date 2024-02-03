@@ -15,6 +15,7 @@ import { Home } from '../screens/Home';
 import { SignIn } from '../screens/SignIn';
 import { MyEvents } from '../screens/MyEvents';
 import { Profile } from '../screens/MyProfile';
+import { Notification } from '../screens/Notifications';
 
 const pages = {
   profile: {
@@ -27,6 +28,12 @@ const pages = {
     icon: 'today' as const,
     label: 'meus eventos',
     screen: MyEvents
+  },
+
+  notifications: {
+    icon: "notifications-none" as const,
+    label: "notificações",
+    screen: Notification
   },
 
   logout: {
@@ -48,8 +55,8 @@ function CustomDrawerContent(props) {
         <View style={styles.header}>
           <Image style={styles.profilePicture} source={{uri:"https://bit.ly/dan-abramov"}}/>
           <View style={styles.textContent}>
-            <Text style={styles.title}>oi Turnardo,</Text>
-            <Text style={styles.subtitle}>Tudo certo?</Text>
+            <Text style={styles.title}>hello Turnardo,</Text>
+            <Text style={styles.subtitle}>Whats up?</Text>
           </View>
         </View>
         </>
