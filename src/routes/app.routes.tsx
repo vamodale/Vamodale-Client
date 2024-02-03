@@ -1,12 +1,12 @@
 import React from 'react';
-import {View, Text, Image, Alert} from 'react-native';
-import { 
-  createDrawerNavigator,
-  DrawerContentScrollView,
-  DrawerItemList,
-  DrawerItem,
- } from '@react-navigation/drawer';
- import { MaterialIcons } from '@expo/vector-icons';
+import { View, Text, Image, Alert } from 'react-native';
+import {
+    createDrawerNavigator,
+    DrawerContentScrollView,
+    DrawerItemList,
+    DrawerItem,
+} from '@react-navigation/drawer';
+import { MaterialIcons } from '@expo/vector-icons';
 
 import { styles } from '../screens/Drawer/styles';
 import { theme } from '../global/styles/theme'
@@ -20,26 +20,27 @@ import { AppointmentInfo } from '../screens/AppointmentInfo';
 // import { Notification } from '../screens/Notifications';
 
 import { useAuth } from '../hooks/auth';
+import { Register } from '../screens/Register';
 
 
 const pages = {
-  profile: {
-    icon: "face" as const,
-    label: 'My Profile',
-    screen: Profile
-  },
+    profile: {
+        icon: "face" as const,
+        label: 'My Profile',
+        screen: Profile
+    },
 
-  // notifications: {
-  //   icon: "notifications-none" as const,
-  //   label: "Notifications",
-  //   screen: Notification
-  // },
+    notifications: {
+        icon: "notifications-none" as const,
+        label: "Notifications",
+        screen: Notification
+    },
 
-  myEvents: {
-    icon: 'today' as const,
-    label: 'My Events',
-    screen: MyEvents
-  },
+    myEvents: {
+        icon: 'today' as const,
+        label: 'My Events',
+        screen: MyEvents
+    },
 }
 
 const Drawer = createDrawerNavigator();
@@ -47,100 +48,99 @@ const Drawer = createDrawerNavigator();
 
 //@ts-ignore
 function CustomDrawerContent(props) {
-  const { user, signOut } = useAuth();
+    const { user, signOut } = useAuth();
 
-  async function handleSignOut(){
-      try {
-          await signOut();
+    async function handleSignOut() {
+        try {
+            await signOut();
 
-      } catch (error) {
-          console.log(error);
-          Alert.alert('Deu bosta ai na conta google.');
-      }
-  }
+        } catch (error) {
+            console.log(error);
+            Alert.alert('Deu bosta ai na conta google.');
+        }
+    }
 
-  return (
-    <DrawerContentScrollView {...props}>
-      <DrawerItem label={
-        () => 
-        <>
-        <View style={styles.header}>
-          <Image style={styles.profilePicture} source={{uri: user.photo }}/>
-          <View style={styles.textContent}>
-            <Text style={styles.title}>hello {user.nickname},</Text>
-            <Text style={styles.subtitle}>Whats up?</Text>
-          </View>
-        </View>
-        </>
-        } onPress={() => alert('alerta funciona')} />
-      <DrawerItemList {...props} />
-      <DrawerItem onPress={handleSignOut} 
-        label="logout"
-        style={styles.drawerItem}
-        labelStyle={styles.drawerItemLabel}
-        icon={() => (
-          <MaterialIcons
-          name="logout"
-          size={24}
-          color={theme.colors.purple}
-        />
-        )}
-        />
-    </DrawerContentScrollView>
-  );
+    return (
+        <DrawerContentScrollView {...props}>
+            <DrawerItem label={
+                () =>
+                    <>
+                        <View style={styles.header}>
+                            <Image style={styles.profilePicture} source={{ uri: user.photo }} />
+                            <View style={styles.textContent}>
+                                <Text style={styles.title}>hello {user.nickname},</Text>
+                                <Text style={styles.subtitle}>Whats up?</Text>
+                            </View>
+                        </View>
+                    </>
+            } onPress={() => alert('alerta funciona')} />
+            <DrawerItemList {...props} />
+            <DrawerItem onPress={handleSignOut}
+                label="logout"
+                style={styles.drawerItem}
+                labelStyle={styles.drawerItemLabel}
+                icon={() => (
+                    <MaterialIcons
+                        name="logout"
+                        size={24}
+                        color={theme.colors.purple}
+                    />
+                )}
+            />
+        </DrawerContentScrollView>
+    );
 }
 
 export function AppRoutes() {
-  return (
-    <Drawer.Navigator
-      initialRouteName="Home"
-      drawerContent={(props) => <CustomDrawerContent {...props} />}
-      screenOptions={{
-        headerShown: false,
-        drawerType: 'front',
-        drawerStyle: styles.background,
-        drawerActiveTintColor: 'rgba(78, 65, 135, 0.25)'
-      }}
-    >
-      {Object.values(pages).map((item) => 
-      <Drawer.Screen key={item.label} options={{
-        title: item.label,
-        drawerItemStyle: styles.drawerItem,
-        drawerLabelStyle: styles.drawerItemLabel,
-        drawerIcon: () => (
-          <MaterialIcons
-            name={item.icon}
-            size={24}
-            color={theme.colors.purple}
-          />
-        ),
-        }} name={item.label} component={item.screen} />
-      )}
-      <Drawer.Screen name="Home" options={{
-          drawerItemStyle: styles.drawerHome
-        }} component={Home}/>
+    return (
+        <Drawer.Navigator
+            initialRouteName="Home"
+            drawerContent={(props) => <CustomDrawerContent {...props} />}
+            screenOptions={{
+                headerShown: false,
+                drawerType: 'front',
+                drawerStyle: styles.background,
+                drawerActiveTintColor: 'rgba(78, 65, 135, 0.25)'
+            }}
+        >
+            {Object.values(pages).map((item) =>
+                <Drawer.Screen key={item.label} options={{
+                    title: item.label,
+                    drawerItemStyle: styles.drawerItem,
+                    drawerLabelStyle: styles.drawerItemLabel,
+                    drawerIcon: () => (
+                        <MaterialIcons
+                            name={item.icon}
+                            size={24}
+                            color={theme.colors.purple}
+                        />
+                    ),
+                }} name={item.label} component={item.screen} />
+            )}
+            <Drawer.Screen name="Home" options={{
+                drawerItemStyle: styles.drawerHome
+            }} component={Home} />
 
-      <Drawer.Screen
-        name="AppointmentCreate" options={{
-          drawerItemStyle: styles.drawerHome
-        }} component={AppointmentCreate}
-        />
-      <Drawer.Screen
-        name="AppointmentInfo" options={{
-          drawerItemStyle: styles.drawerHome
-        }} component={AppointmentInfo}
-        />
-      <Drawer.Screen
-        name="EditProfile" options={{
-          drawerItemStyle: styles.drawerHome
-        }} component={EditProfile}
-        />
-        <Drawer.Screen
-        name="Notifications" options={{
-          drawerItemStyle: styles.drawerHome
-        }} component={Notification}
-        />
-    </Drawer.Navigator>
-  );
+            <Drawer.Screen
+                name="AppointmentCreate" options={{
+                    drawerItemStyle: styles.drawerHome
+                }} component={AppointmentCreate}
+            />
+            <Drawer.Screen
+                name="AppointmentInfo" options={{
+                    drawerItemStyle: styles.drawerHome
+                }} component={AppointmentInfo}
+            />
+            <Drawer.Screen
+                name="EditProfile" options={{
+                    drawerItemStyle: styles.drawerHome
+                }} component={EditProfile}
+            />
+            <Drawer.Screen
+                name="Register" options={{
+                    drawerItemStyle: styles.drawerHome
+                }} component={Register}
+            />
+        </Drawer.Navigator>
+    );
 }
- 
